@@ -24,10 +24,22 @@ router.get('/new', (req, res) => {
     res.render('restaurants/new')
 });
 
+router.post('/', async(req, res) => {
+    const restaurant = new Restaurant(req.body.restaurant);
+    await restaurant.save();
+    res.redirect(`/restaurants/${restaurant._id}`);
+});
+
 router.get('/:id', async(req, res) => {
     const { id } = req.params;
     const restaurant = await Restaurant.findById(id);
     res.render('restaurants/show', { restaurant });
+});
+
+router.get('/:id/edit', async(req, res) => {
+    const { id } = req.params;
+    const restaurant = await Restaurant.findById(id);
+    res.render('restaurants/edit', { restaurant });
 });
 
 

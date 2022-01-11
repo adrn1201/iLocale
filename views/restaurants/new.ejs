@@ -2,8 +2,7 @@
 
     <section class="ad-post bg-gray py-5">
         <div class="container">
-            <form action="#">
-                <!-- Post Your ad start -->
+            <form action="/restaurants" method="POST">
                 <fieldset class="border border-gary p-4 mb-5">
                     <div class="row">
                         <div class="col-lg-12">
@@ -11,13 +10,13 @@
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Restaurant Name:</h6>
-                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Restaurant Name">
+                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Restaurant Name" id="new-title" name="restaurant[title]">
                             <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
-                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Location">
+                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Location" id="new-location" name="restaurant[location]">
                             <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
-                            <textarea name="" id="" class="border p-3 w-100" rows="7" placeholder="Write details about your product"></textarea>
+                            <textarea class="border p-3 w-100" rows="7" placeholder="Write details about the restaurant" id="new-description" name="restaurant[description]"></textarea>
                         </div>
-                        <div class="col-lg-6">
+                        <!-- <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
                             <select name="" id="inputGroupSelect" class="w-100">
                             <option value="1">Select category</option>
@@ -30,26 +29,27 @@
                             <option value="8">11inch Macbook Air</option>
                             <option value="9">Study Table Combo</option>
                             <option value="10">11inch Macbook Air</option>
-                        </select>
-
-                            <div class="choose-file text-center my-4 py-4 rounded" id="drop-container">
+                        </select> -->
+                        <h6 class="font-weight-bold pt-4 pb-1">image:</h6>
+                        <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="image" name="restaurant[images]">
+                        <!-- <div class="choose-file text-center my-4 py-4 rounded" id="drop-container">
                                 <label for="file-upload">
                                 <span class="d-block font-weight-bold text-dark" id="file-text">Image(s):</span>
                                 <span class="d-block btn bg-primary text-white my-3 select-files">Choose image(s)</span>
                                 <span class="d-block">Maximum number of images: 4</span>
                                 <input type="file" class="form-control-file d-none" id="file-upload" name="file" multiple>
                             </label>
-                            </div>
-                        </div>
+                            </div> -->
                     </div>
-                </fieldset>
+        </div>
+        </fieldset>
 
-                <div class="row">
-                    <div class="col-md-6 offset-md-5">
-                        <button type="submit" class="btn btn-success d-block mt-2">Post</button>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-5">
+                <button type="submit" class="btn btn-success d-block mt-2">Post</button>
+            </div>
+        </div>
 
-            </form>
+        </form>
         </div>
     </section>
