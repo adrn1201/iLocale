@@ -1,4 +1,5 @@
 const express = require('express');
+const { findByIdAndUpdate } = require('../models/restaurant');
 const router = express.Router();
 const Restaurant = require('../models/restaurant');
 
@@ -40,6 +41,12 @@ router.get('/:id/edit', async(req, res) => {
     const { id } = req.params;
     const restaurant = await Restaurant.findById(id);
     res.render('restaurants/edit', { restaurant });
+});
+
+router.put('/:id', async(req, res) => {
+    const { id } = req.params;
+    const restaurant = await Restaurant.findByIdAndUpdate(id, req.body.restaurant);
+    res.redirect(`/restaurants/${restaurant._id}`);
 });
 
 
