@@ -24,6 +24,12 @@ router.get('/new', (req, res) => {
     res.render('restaurants/new')
 });
 
+router.get('/:id', async(req, res) => {
+    const { id } = req.params;
+    const restaurant = await Restaurant.findById(id);
+    res.render('restaurants/show', { restaurant });
+});
+
 
 
 module.exports = router;
