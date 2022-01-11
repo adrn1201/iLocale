@@ -16,7 +16,11 @@ const restaurantSchema = new Schema({
     },
     images: {
         type: String
-    }
+    },
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Review'
+    }]
 });
 
 module.exports = mongoose.model('Restaurant', restaurantSchema);

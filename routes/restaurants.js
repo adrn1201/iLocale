@@ -1,21 +1,7 @@
 const express = require('express');
-const { findByIdAndUpdate } = require('../models/restaurant');
 const router = express.Router();
 const Restaurant = require('../models/restaurant');
 
-/*
-
-RESTFUL API
-
-GET -> /restaurants
-GET -> /restaurants/new
-POST -> /restaurants
-GET -> /restaurants/:id
-GET -> /restaurants/:id/edit
-PUT-> /restaurants/:id
-DELETE -> /restaurants/:id
-
-*/
 router.get('/', async(req, res) => {
     const restaurants = await Restaurant.find({});
     res.render('restaurants/index', { restaurants });
@@ -49,6 +35,10 @@ router.put('/:id', async(req, res) => {
     res.redirect(`/restaurants/${restaurant._id}`);
 });
 
-
+router.delete('/:id', async(req, res) => {
+    const { id } = req.params;
+    await Restaurant.findByIdAndDelete(id);
+    res.redirect('/restaurants');
+});
 
 module.exports = router;

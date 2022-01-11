@@ -4,8 +4,10 @@ const ejsMate = require('ejs-mate');
 const path = require('path');
 const methodOverride = require('method-override');
 
-const mongoose = require('mongoose');
 const restaurantRoutes = require('./routes/restaurants');
+const reviewRoutes = require('./routes/reviews');
+
+const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
 
 /* DB Section CONNECTION */
@@ -27,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 app.use('/restaurants', restaurantRoutes);
+app.use('/restaurants/:id/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
     res.render('home');
