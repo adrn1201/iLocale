@@ -19,7 +19,7 @@ router.post('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
     const { id } = req.params;
-    const restaurant = await Restaurant.findById(id);
+    const restaurant = await Restaurant.findById(id).populate('reviews');
     res.render('restaurants/show', { restaurant });
 });
 
