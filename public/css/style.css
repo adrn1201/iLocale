@@ -254,14 +254,15 @@ a:hover {
     color: #5672f9;
 }
 
-.form-control {
+
+/* .form-control {
     border-radius: 2px;
     height: 50px;
     background-color: transparent;
     color: #666;
     box-shadow: none;
     font-size: 15px;
-}
+} */
 
 .form-control:focus {
     color: #666;
@@ -541,7 +542,7 @@ button {
 }
 
 .btn:focus {
-    color: #5672f9;
+    color: white;
     box-shadow: none;
 }
 
@@ -2765,6 +2766,10 @@ form textarea {
 
 #show-sidebar {
     margin-top: 8em;
+}
+
+.error-text {
+    font-size: 1rem;
 }
 
 

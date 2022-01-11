@@ -28,9 +28,7 @@
             </div>
         </div>
     </section>
-    <!--===================================
-=            Store Section            =
-====================================-->
+
     <section class="section bg-gray">
         <!-- Container Start -->
         <div class="container">
@@ -94,9 +92,9 @@
                                             <h3 class="tab-title">Submit your review</h3>
 
                                             <div class="review-submit">
-                                                <form action="/restaurants/<%= restaurant._id %>/reviews" method="POST" class="row">
+                                                <form action="/restaurants/<%= restaurant._id %>/reviews" method="POST" class="row needs-validation" novalidate>
                                                     <fieldset class="starability-basic" id="star-form">
-                                                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                                                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
                                                         <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                                                         <label for="first-rate1" title="Terrible">1 star</label>
                                                         <input type="radio" id="first-rate2" name="review[rating]" value="2" />
@@ -109,7 +107,8 @@
                                                         <label for="first-rate5" title="Amazing">5 stars</label>
                                                     </fieldset>
                                                     <div class="col-12">
-                                                        <textarea name="review[body]" id="review" rows="5" class="form-control" placeholder="Message"></textarea>
+                                                        <textarea name="review[body]" id="review" rows="5" class="form-control" placeholder="Message" required></textarea>
+                                                        <div class="invalid-feedback mb-3 error-text">Message is required</div>
                                                     </div>
                                                     <div class="col-12">
                                                         <button type="submit" class="btn btn-success">Submit</button>
