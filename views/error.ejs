@@ -1,0 +1,28 @@
+<% layout('layouts/boilerplate') %>
+    <section class="section bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center mx-auto">
+                    <% if(err.statusCode === 404){ %>
+                        <div class="404-img">
+                            <img src="/images/404/404.png" class="img-fluid" alt="">
+                        </div>
+                        <% } else{%>
+                            <h1 class="display-1 pt-1 pb-2">
+                                <%= err.statusCode %>
+                            </h1>
+                            <% } %>
+
+                                <div class="404-content">
+                                    <p class="px-3 mt-3 pb-2 text-dark">
+                                        <%= err.message %>
+                                    </p>
+                                    <p>
+                                        <%= err.stack %>
+                                    </p>
+                                    <a href="/" class="btn btn-info">GO HOME</a>
+                                </div>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -3,7 +3,7 @@ const app = express();
 const ejsMate = require('ejs-mate');
 const path = require('path');
 const methodOverride = require('method-override');
-
+const AppError = require('./utils/AppError');
 const restaurantRoutes = require('./routes/restaurants');
 const reviewRoutes = require('./routes/reviews');
 
@@ -33,6 +33,16 @@ app.use('/restaurants/:id/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
     res.render('home');
+});
+
+app.all('*', (req, res, next) => {
+    return next(new AppError('Page Not Found', 404));
+});
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = 'Something Went Wrong!';
+    res.status(statusCode).render('error', { err });
 });
 
 app.listen(port, () => {
