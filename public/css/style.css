@@ -2771,7 +2771,11 @@ form textarea {
     font-size: 1rem;
 }
 
+#review-options {
+    padding: 0px;
+}
 
-/* #post-controls {
-    padding10px;
-} */
+#option-delete:hover {
+    background-color: #d9534f;
+    color: white;
+}
