@@ -2779,3 +2779,12 @@ form textarea {
     background-color: #d9534f;
     color: white;
 }
+
+#alternate-text {
+    margin-left: 12em;
+    font-size: medium;
+}
+
+#register-link {
+    margin-left: 9.5em;
+}
