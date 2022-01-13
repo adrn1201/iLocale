@@ -3,9 +3,11 @@ const app = express();
 const ejsMate = require('ejs-mate');
 const path = require('path');
 const methodOverride = require('method-override');
-const AppError = require('./utils/AppError');
 const restaurantRoutes = require('./routes/restaurants');
 const reviewRoutes = require('./routes/reviews');
+const AppError = require('./utils/AppError');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
@@ -27,6 +29,27 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+const sessionConfig = {
+    name: 'session',
+    secret: 'devmodesecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 app.use('/restaurants', restaurantRoutes);
 app.use('/restaurants/:id/reviews', reviewRoutes);

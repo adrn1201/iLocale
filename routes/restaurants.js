@@ -27,6 +27,7 @@ router.get('/new', (req, res) => {
 router.post('/', validateRestaurant, catchAsync(async(req, res) => {
     const restaurant = new Restaurant(req.body.restaurant);
     await restaurant.save();
+    req.flash('success', 'Successfully Created a New Post!');
     res.redirect(`/restaurants/${restaurant._id}`);
 }));
 
@@ -45,12 +46,14 @@ router.get('/:id/edit', catchAsync(async(req, res) => {
 router.put('/:id', validateRestaurant, catchAsync(async(req, res) => {
     const { id } = req.params;
     const restaurant = await Restaurant.findByIdAndUpdate(id, req.body.restaurant);
+    req.flash('success', 'Successfully Updated Post!');
     res.redirect(`/restaurants/${restaurant._id}`);
 }));
 
 router.delete('/:id', catchAsync(async(req, res) => {
     const { id } = req.params;
     await Restaurant.findByIdAndDelete(id);
+    req.flash('success', 'Successfully Deleted Post!');
     res.redirect('/restaurants');
 }));
 
