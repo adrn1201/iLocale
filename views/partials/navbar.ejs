@@ -57,12 +57,18 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto mt-10">
-                            <li class="nav-item">
-                                <a class="nav-link login-button" href="/login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white add-button" href="/register">Register</a>
-                            </li>
+                            <% if(!currentUser){ %>
+                                <li class="nav-item">
+                                    <a class="nav-link login-button" href="/login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white add-button" href="/register">Register</a>
+                                </li>
+                                <% } else{ %>
+                                    <li class="nav-item">
+                                        <a class="nav-link login-button" href="/logout">Logout</a>
+                                    </li>
+                                    <% } %>
                         </ul>
                     </div>
                 </nav>

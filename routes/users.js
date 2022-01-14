@@ -30,7 +30,7 @@ router.post('/register', validatePassword, async(req, res) => {
             res.redirect('/restaurants');
         });
     } catch (e) {
-        req.flash('authError', e.message);
+        req.flash('error', e.message);
         res.redirect('/register');
     }
 });
@@ -40,7 +40,14 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
-    res.redirect('/restaurants');
+    const redirectUrl = req.session.returnTo || '/';
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
 });
 
 module.exports = router;
