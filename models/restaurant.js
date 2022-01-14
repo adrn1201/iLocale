@@ -21,7 +21,11 @@ const restaurantSchema = new Schema({
     reviews: [{
         type: Schema.Types.ObjectId,
         ref: 'Review'
-    }]
+    }],
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 restaurantSchema.post('findOneAndDelete', async(doc) => {

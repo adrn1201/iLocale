@@ -15,6 +15,7 @@ const seedDB = async() => {
     for (let i = 0; i < 9; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         const restaurant = new Restaurant({
+            author: '61e10fa6e4983cd57cd5be92',
             location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
             title: `${sample(restaurants)}`,
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, unde cupiditate! Aliquid quidem nostrum enim molestias nulla eius consequatur consectetur eligendi pariatur. Fuga atque error explicabo obcaecati, debitis quaerat doloremque.',

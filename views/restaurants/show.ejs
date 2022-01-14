@@ -41,9 +41,17 @@
                         </h1>
                         <div class="product-meta">
                             <ul class="list-inline">
-                                <li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="">Andrew</a></li>
+                                <li class="list-inline-item"><i class="fa fa-user-o"></i> By
+                                    <a href="">
+                                        <%= restaurant.author.username %>
+                                    </a>
+                                </li>
                                 <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">Electronics</a></li>
-                                <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">Dhaka Bangladesh</a></li>
+                                <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location
+                                    <a href="">
+                                        <%= restaurant.location %>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 
@@ -88,79 +96,82 @@
                                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 
                                     <div class="product-review">
-                                        <div class="review-submission">
-                                            <h3 class="tab-title">Submit your review</h3>
-
-                                            <div class="review-submit">
-                                                <form action="/restaurants/<%= restaurant._id %>/reviews" method="POST" class="row needs-validation" novalidate>
-                                                    <fieldset class="starability-basic" id="star-form">
-                                                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
-                                                        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                                                        <label for="first-rate1" title="Terrible">1 star</label>
-                                                        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                                                        <label for="first-rate2" title="Not good">2 stars</label>
-                                                        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                                                        <label for="first-rate3" title="Average">3 stars</label>
-                                                        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                                                        <label for="first-rate4" title="Very good">4 stars</label>
-                                                        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                                                        <label for="first-rate5" title="Amazing">5 stars</label>
-                                                    </fieldset>
-                                                    <div class="col-12">
-                                                        <textarea name="review[body]" id="review" rows="5" class="form-control" placeholder="Message" required></textarea>
-                                                        <div class="invalid-feedback mb-3 error-text">Message is required</div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <button type="submit" class="btn btn-success">Submit</button>
-                                                    </div>
-                                                </form>
+                                        <% if(currentUser){ %>
+                                            <div class="review-submission">
+                                                <h3 class="tab-title">Submit your review</h3>
+                                                <div class="review-submit">
+                                                    <form action="/restaurants/<%= restaurant._id %>/reviews" method="POST" class="row needs-validation" novalidate>
+                                                        <fieldset class="starability-basic" id="star-form">
+                                                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                                                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                                            <label for="first-rate1" title="Terrible">1 star</label>
+                                                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                                            <label for="first-rate2" title="Not good">2 stars</label>
+                                                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                                            <label for="first-rate3" title="Average">3 stars</label>
+                                                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                                            <label for="first-rate4" title="Very good">4 stars</label>
+                                                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                                            <label for="first-rate5" title="Amazing">5 stars</label>
+                                                        </fieldset>
+                                                        <div class="col-12">
+                                                            <textarea name="review[body]" id="review" rows="5" class="form-control" placeholder="Message" required></textarea>
+                                                            <div class="invalid-feedback mb-3 error-text">Message is required</div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-success">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <h3 class="tab-title mt-5">Restaurant Reviews</h3>
-                                        <% if(restaurant.reviews.length){ %>
-                                            <% for(let review of restaurant.reviews){ %>
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <div class="row">
-                                                            <div class="col-11">
-                                                                <p class="starability-result" data-rating="<%=review.rating%>">
-                                                                    Rated:
-                                                                    <%= review.rating %> stars
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-1 dropleft">
-                                                                <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                                                </a>
-                                                                <div class="dropdown-menu" id="review-options">
-                                                                    <form action="/restaurants/<%= restaurant._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                                                                        <button class="dropdown-item" id="option-delete">Delete</button>
-                                                                    </form>
+                                            <% } %>
+                                                <h3 class="tab-title <%= !currentUser ? '' : 'mt-5' %>">Restaurant Reviews</h3>
+                                                <% if(restaurant.reviews.length){ %>
+                                                    <% for(let review of restaurant.reviews){ %>
+                                                        <div class="media">
+                                                            <div class="media-body">
+                                                                <div class="row">
+                                                                    <div class="col-11">
+                                                                        <p class="starability-result" data-rating="<%=review.rating%>">
+                                                                            Rated:
+                                                                            <%= review.rating %> stars
+                                                                        </p>
+                                                                    </div>
+                                                                    <% if(currentUser && review.author.equals(currentUser._id)){ %>
+                                                                        <div class="col-1 dropleft">
+                                                                            <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            </a>
+                                                                            <div class="dropdown-menu" id="review-options">
+                                                                                <form action="/restaurants/<%= restaurant._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                                                                    <button class="dropdown-item" id="option-delete">Delete</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% } %>
+                                                                </div>
+                                                                <div class="name">
+                                                                    <h5>
+                                                                        <%= review.author.username %>
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="date">
+                                                                    <p>Mar 20, 2018</p>
+                                                                </div>
+                                                                <div class="review-comment">
+                                                                    <p>
+                                                                        <%= review.body %>
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="name">
-                                                            <h5>Jessica Brown</h5>
-                                                        </div>
-                                                        <div class="date">
-                                                            <p>Mar 20, 2018</p>
-                                                        </div>
-                                                        <div class="review-comment">
-                                                            <p>
-                                                                <%= review.body %>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <% } %>
-                                                    <% } else{ %>
-                                                        <div class="review-comment text-center">
-                                                            <p>
-                                                                No reviews yet.
-                                                            </p>
-                                                        </div>
                                                         <% } %>
+                                                            <% } else{ %>
+                                                                <div class="review-comment text-center">
+                                                                    <p>
+                                                                        No reviews yet.
+                                                                    </p>
+                                                                </div>
+                                                                <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -174,17 +185,18 @@
                                 <div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
                             </div>
                         </div>
-                        <div class="widget user text-center" id="post-controls">
-                            <ul class="list-inline mt-20">
-                                <li class="list-inline-item"><a href="/restaurants/<%= restaurant._id%>/edit" class="btn btn-contact d-inline-block  btn-info px-lg-3 my-1 px-md-3">Edit Post</a></li>
-                                <li class="list-inline-item">
-                                    <form action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
-                                        <button class="btn btn-offer btn-danger ml-n1 my-1 px-lg-4 px-md-3">Delete Post</button>
-                                    </form>
-                                </li>
-                            </ul>
-
-                        </div>
+                        <% if(currentUser && restaurant.author.equals(currentUser._id)){ %>
+                            <div class="widget user text-center" id="post-controls">
+                                <ul class="list-inline mt-20">
+                                    <li class="list-inline-item"><a href="/restaurants/<%= restaurant._id%>/edit" class="btn btn-contact d-inline-block  btn-info px-lg-3 my-1 px-md-3">Edit Post</a></li>
+                                    <li class="list-inline-item">
+                                        <form action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
+                                            <button class="btn btn-offer btn-danger ml-n1 my-1 px-lg-4 px-md-3">Delete Post</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <% } %>
                     </div>
                 </div>
 
