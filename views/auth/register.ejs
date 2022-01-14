@@ -3,16 +3,28 @@
     <section class="login py-5 border-top-1">
         <div class="container">
             <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-9 align-item-center">
+                    <%- include('../partials/authFlash') %>
+                </div>
+            </div>
+            <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-8 align-item-center">
                     <div class="border border">
                         <h3 class="bg-gray p-4">Register</h3>
                         <form action="/register" method="POST" class="needs-validation" novalidate>
                             <fieldset class="p-4">
-                                <input type="email" placeholder="Email*" class="form-control p-3 w-100 my-2" required>
-                                <div class="invalid-feedback error-text">Email is required</div>
-                                <input type="text" placeholder="Username*" class="form-control mt-3 p-3 w-100 my-2" required>
+                                <input type="text" name="username" placeholder="Username*" class="form-control mt-3 p-3 w-100 my-2" required autofocus>
                                 <div class="invalid-feedback error-text">Username is required</div>
-                                <input type="password" placeholder="Password*" class="form-control mt-3 p-3 w-100 my-2" required>
+                                <input type="email" name="email" placeholder="Email*" class="form-control p-3 w-100 my-2" required>
+                                <div class="invalid-feedback error-text">Email is required</div>
+                                <input type="password" name="password" placeholder="Password*" class="form-control mt-3 p-3 w-100 my-2" required>
+                                <ul class="ml-3">
+                                    <% for(let err of passwordError){ %>
+                                        <li class="text-danger">
+                                            <%= err %>
+                                        </li>
+                                        <% }%>
+                                </ul>
                                 <div class="invalid-feedback error-text">Password is required</div>
                                 <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold offset-4 mt-3">Register</button>
                             </fieldset>
