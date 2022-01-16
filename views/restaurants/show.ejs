@@ -57,21 +57,12 @@
 
                         <!-- product slider -->
                         <div class="product-slider">
-                            <div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-                                <img class="img-fluid w-100" src="<%= restaurant.images %>" alt="product-img">
-                            </div>
-                            <div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-                                <img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Second slide">
-                            </div>
-                            <div class="product-slider-item my-4" data-image="images/products/products-3.jpg">
-                                <img class="d-block img-fluid w-100" src="images/products/products-3.jpg" alt="Third slide">
-                            </div>
-                            <div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-                                <img class="d-block img-fluid w-100" src="images/products/products-1.jpg" alt="Third slide">
-                            </div>
-                            <div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-                                <img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Third slide">
-                            </div>
+                            <% for(let imgs of restaurant.images){ %>
+                                <div class="product-slider-item mt-4" style="margin-bottom: 8em;" data-image="<%= imgs.carousel %>">
+                                    <img class="img-fluid w-100" src="<%= imgs.carousel %>" alt="product-img">
+                                </div>
+                                <% } %>
+
                         </div>
                         <!-- product slider -->
 

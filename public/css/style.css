@@ -231,7 +231,7 @@ ol,
 ul {
     margin: 0;
     padding: 0;
-    list-style: circle;
+    list-style: none;
 }
 
 figure {
@@ -2787,4 +2787,13 @@ form textarea {
 
 #register-link {
     margin-left: 9.5em;
+}
+
+.input-checkbox {
+    height: 1.2em;
+    width: 1.2em;
+}
+
+.label-edit {
+    font-size: 1rem;
 }
