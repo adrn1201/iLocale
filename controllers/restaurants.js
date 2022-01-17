@@ -1,4 +1,7 @@
 const Restaurant = require('../models/restaurant');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({accessToken: mapBoxToken});
 const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async(req, res) => {
@@ -11,10 +14,16 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createRestaurant = async(req, res) => {
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.restaurant.location,
+        limit: 1
+    }).send()
     const restaurant = new Restaurant(req.body.restaurant);
+    restaurant.geometry =  geoData.body.features[0].geometry;
     restaurant.images = req.files.map(f => ({ url: f.path, filename: f.filename, originalName: f.originalname }));
     restaurant.author = req.user._id;
     await restaurant.save();
+    console.log(restaurant);
     req.flash('success', 'Successfully Created a New Post!');
     res.redirect(`/restaurants/${restaurant._id}`);
 };

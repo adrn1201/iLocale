@@ -15,11 +15,19 @@ const seedDB = async() => {
     for (let i = 0; i < 9; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         const restaurant = new Restaurant({
-            author: '61e10fa6e4983cd57cd5be92',
+            author: '61e4e0366a75a5fdf7c221e5',
             location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
+            geometry: {
+                type: 'Point',
+                coordinates: [-73.9866, 40.7306]
+            },
             title: `${sample(restaurants)}`,
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, unde cupiditate! Aliquid quidem nostrum enim molestias nulla eius consequatur consectetur eligendi pariatur. Fuga atque error explicabo obcaecati, debitis quaerat doloremque.',
-            images: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
+            images: [{
+                url: 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg',
+                filename: 'iLocale/w2cjwlko98y1i8z1vtx2',
+                originalName: 'yum2.jpg'
+            }]
         });
         await restaurant.save();
     }

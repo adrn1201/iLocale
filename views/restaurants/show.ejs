@@ -171,11 +171,12 @@
                 </div>
                 <div class="col-md-4" id="show-sidebar">
                     <div class="sidebar sticky-top">
-                        <div class="widget map">
+                        <div id='map' style='width: 100%; height: 300px;'></div>
+                        <!-- <div class="widget map">
                             <div class="map">
                                 <div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
                             </div>
-                        </div>
+                        </div> -->
                         <% if(currentUser && restaurant.author.equals(currentUser._id)){ %>
                             <div class="widget user text-center" id="post-controls">
                                 <ul class="list-inline mt-20">
@@ -194,3 +195,10 @@
             </div>
         </div>
     </section>
+
+    <script>
+        const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
+        const restaurant = <%- JSON.stringify(restaurant) %>;
+    </script>
+
+    <script src="/js/showPageMap.js"></script>
