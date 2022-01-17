@@ -171,14 +171,9 @@
                 </div>
                 <div class="col-md-4" id="show-sidebar">
                     <div class="sidebar sticky-top">
-                        <div id='map' style='width: 100%; height: 300px;'></div>
-                        <!-- <div class="widget map">
-                            <div class="map">
-                                <div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
-                            </div>
-                        </div> -->
+                        <div id='map'></div>
                         <% if(currentUser && restaurant.author.equals(currentUser._id)){ %>
-                            <div class="widget user text-center" id="post-controls">
+                            <div class="widget user text-center mt-4" id="post-controls">
                                 <ul class="list-inline mt-20">
                                     <li class="list-inline-item"><a href="/restaurants/<%= restaurant._id%>/edit" class="btn btn-contact d-inline-block  btn-info px-lg-3 my-1 px-md-3">Edit Post</a></li>
                                     <li class="list-inline-item">
