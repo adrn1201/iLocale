@@ -16,6 +16,8 @@ imageSchema.virtual('selection').get(function() {
     return this.url.replace('/upload', '/upload/w_450,h_450,c_scale,e_improve,e_sharpen');
 });
 
+const opts = { toJSON: { virtuals: true } };
+
 const restaurantSchema = new Schema({
     title: {
         type: String,
@@ -49,6 +51,12 @@ const restaurantSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }
+}, opts);
+
+restaurantSchema.virtual('properties.popUpMarkup').get(function() {
+    return `
+        <strong><a href="/restaurants/${this._id}">${this.title}</a></strong>
+        <p>${this.description.substring(0, 20)}...</p>`;
 });
 
 restaurantSchema.post('findOneAndDelete', async(doc) => {
