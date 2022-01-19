@@ -50,6 +50,10 @@ const restaurantSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
     }
 }, opts);
 

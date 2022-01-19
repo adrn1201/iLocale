@@ -1135,7 +1135,9 @@ ul.pagination .active a {
     width: 15%;
 }
 
-.dashboard-container tbody tr:hover .action a {
+.dashboard-container tbody tr:hover .action a,
+.dashboard-container tbody tr:hover .action button,
+.dashboard-container tbody tr:hover .action form {
     color: #fff;
 }
 
@@ -1147,7 +1149,8 @@ ul.pagination .active a {
     background: #50c6e9;
 }
 
-.dashboard-container tbody tr:hover .action a.delete {
+.dashboard-container tbody tr:hover .action a.delete,
+.dashboard-container tbody tr:hover .action button.delete {
     background: #ff5252;
 }
 
@@ -1185,25 +1188,35 @@ ul.pagination .active a {
     text-align: center;
 }
 
-.dashboard-container .action a {
+.dashboard-container .action a,
+.dashboard-container .action button {
     width: 40px;
     height: 40px;
     border-radius: 40px;
+    border: none;
     font-size: 14px;
     color: #363b4d;
     text-align: center;
     display: inline-block;
 }
 
-.dashboard-container .action a:hover {
+.dashboard-container .action a:hover,
+.dashboard-container .action button:hover {
     color: #fff;
 }
 
-.dashboard-container .action a:hover.delete {
+.dashboard-container .action a:hover.delete,
+.dashboard-container .action button:hover.delete {
     background: #ff5252;
 }
 
-.dashboard-container .action a i {
+.dashboard-container .action button:focus.delete {
+    background: #ff5252;
+    outline: none;
+}
+
+.dashboard-container .action a i,
+.dashboard-container .action button i {
     line-height: 40px;
 }
 

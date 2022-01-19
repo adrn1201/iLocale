@@ -8,6 +8,7 @@ const ejsMate = require('ejs-mate');
 const path = require('path');
 const methodOverride = require('method-override');
 const userRoutes = require('./routes/users');
+const adminRoutes = require('./routes/categories');
 const restaurantRoutes = require('./routes/restaurants');
 const reviewRoutes = require('./routes/reviews');
 const AppError = require('./utils/AppError');
@@ -70,6 +71,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', userRoutes);
+app.use('/admin/categories', adminRoutes);
 app.use('/restaurants', restaurantRoutes);
 app.use('/restaurants/:id/reviews', reviewRoutes);
 
