@@ -1,5 +1,6 @@
 const Restaurant = require('../models/restaurant');
 const Review = require('../models/review');
+const Category = require('../models/category');
 const { restaurantSchema, reviewSchema } = require('../schemas');
 const AppError = require('../utils/AppError');
 
@@ -48,6 +49,16 @@ module.exports.isReviewAuthor = async(req, res, next) => {
     if (!review.author.equals(req.user._id)) {
         req.flash('error', 'You Do not Have Permission to Do That!');
         return res.redirect(`/restaurants/${id}`);
+    }
+    next();
+}
+
+module.exports.isCategoryAuthor = async(req, res, next) => {
+    const { id } = req.params;
+    const category = await Restaurant.findById(id);
+    if (!category.author.equals(req.user._id)) {
+        req.flash('error', 'You Do not Have Permission to Do That!');
+        return res.redirect(`/admin/categories`);
     }
     next();
 }

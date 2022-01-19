@@ -10,7 +10,7 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.createCategory = async(req, res) => {
-    const category = new Category(req.body.category, { author: req.user._id });
+    const category = new Category({...req.body.category, author: req.user._id });
     await category.save();
     req.flash('success', 'Successfully Created New Category');
     res.redirect('/admin/categories');
