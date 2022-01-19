@@ -1,16 +1,18 @@
 const Restaurant = require('../models/restaurant');
+const Category = require('../models/category');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async(req, res) => {
-    const restaurants = await Restaurant.find({});
+    const restaurants = await Restaurant.find({}).populate('category');
     res.render('restaurants/index', { restaurants });
 };
 
-module.exports.renderNewForm = (req, res) => {
-    res.render('restaurants/new')
+module.exports.renderNewForm = async(req, res) => {
+    const categories = await Category.find({});
+    res.render('restaurants/new', { categories })
 };
 
 module.exports.createRestaurant = async(req, res) => {
@@ -20,6 +22,7 @@ module.exports.createRestaurant = async(req, res) => {
     }).send()
     const restaurant = new Restaurant(req.body.restaurant);
     restaurant.geometry = geoData.body.features[0].geometry;
+    restaurant.category = req.body.restaurant.category;
     restaurant.images = req.files.map(f => ({ url: f.path, filename: f.filename, originalName: f.originalname }));
     restaurant.author = req.user._id;
     await restaurant.save();
@@ -30,7 +33,7 @@ module.exports.createRestaurant = async(req, res) => {
 
 module.exports.showRestaurants = async(req, res) => {
     const { id } = req.params;
-    const restaurant = await Restaurant.findById(id).populate({
+    const restaurant = await Restaurant.findById(id).populate('category').populate({
         path: 'reviews',
         populate: {
             path: 'author'
@@ -45,8 +48,9 @@ module.exports.showRestaurants = async(req, res) => {
 
 module.exports.renderEditForm = async(req, res) => {
     const { id } = req.params;
-    const restaurant = await Restaurant.findById(id);
-    res.render('restaurants/edit', { restaurant });
+    const restaurant = await Restaurant.findById(id).populate('category');
+    const categories = await Category.find({});
+    res.render('restaurants/edit', { restaurant, categories });
 };
 
 module.exports.updateRestaurant = async(req, res) => {

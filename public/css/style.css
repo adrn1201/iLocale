@@ -254,6 +254,14 @@ a:hover {
     color: #5672f9;
 }
 
+.form-select {
+    border-radius: 2px;
+    height: 50px;
+    background-color: transparent;
+    color: #666;
+    box-shadow: none;
+}
+
 .form-control {
     border-radius: 2px;
     height: 50px;

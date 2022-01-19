@@ -46,7 +46,11 @@
                                         <%= restaurant.author.username %>
                                     </a>
                                 </li>
-                                <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">Electronics</a></li>
+                                <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category
+                                    <a href="">
+                                        <%= restaurant.category.displayText %>
+                                    </a>
+                                </li>
                                 <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location
                                     <a href="">
                                         <%= restaurant.location %>

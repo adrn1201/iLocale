@@ -63,6 +63,10 @@ restaurantSchema.virtual('properties.popUpMarkup').get(function() {
         <p>${this.description.substring(0, 20)}...</p>`;
 });
 
+restaurantSchema.virtual('shortText').get(function() {
+    return `${this.description.substring(0, 30)}...`
+})
+
 restaurantSchema.post('findOneAndDelete', async(doc) => {
     if (doc) {
         await Review.deleteMany({

@@ -5,6 +5,7 @@ module.exports.restaurantSchema = Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
         location: Joi.string().required(),
+        category: Joi.string().required(),
     }).required(),
     deleteImages: Joi.array()
 });

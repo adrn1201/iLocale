@@ -67,14 +67,14 @@
                                             </h4>
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
-                                                    <a href="single.html"><i class="fa fa-cutlery"></i>Restaurants</a>
+                                                    <a href="single.html"><i class="fa fa-cutlery"></i><%= restaurant.category.displayText %></a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <a href="#"><i class="fa fa-location-arrow"></i><%= restaurant.location %> </a>
                                                 </li>
                                             </ul>
                                             <p class="card-text">
-                                                <%= restaurant.description %>
+                                                <%= restaurant.shortText %>
                                             </p>
                                             <div class="product-ratings">
                                                 <ul class="list-inline">
