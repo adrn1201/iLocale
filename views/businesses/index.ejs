@@ -43,38 +43,38 @@
                     add side bar category if needed %>
                 <div class="product-grid-list">
                     <div class="row mt-30">
-                        <% for(const restaurant of restaurants) { %>
+                        <% for(const business of businesses) { %>
                             <div class="col-sm-12 col-lg-4 col-md-6">
                                 <!-- product card -->
                                 <div class="product-item bg-light">
                                     <div class="card">
                                         <div class="thumb-content">
                                             <!-- <div class="price">$200</div> -->
-                                            <% if(restaurant.images.length){ %>
-                                                <a href="/restaurants/<%=restaurant._id %>">
-                                                <img class="card-img-top img-fluid" src="<%= restaurant.images[0].url %>" alt="Card image cap">
+                                            <% if(business.images.length){ %>
+                                                <a href="/businesses/<%=business._id %>">
+                                                <img class="card-img-top img-fluid" src="<%= business.images[0].url %>" alt="Card image cap">
                                             </a>
                                                 <% } else{ %>
-                                                    <a href="/restaurants/<%=restaurant._id %>">
+                                                    <a href="/businesses/<%=business._id %>">
                                                         <img class="card-img-top img-fluid" src="https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg" alt="Card image cap">
                                                         <% } %>
                                         </div>
                                         <div class="card-body">
                                             <h4 class="card-title">
-                                                <a href="/restaurants/<%=restaurant._id %>">
-                                                    <%= restaurant.title %>
+                                                <a href="/businesses/<%=business._id %>">
+                                                    <%= business.title %>
                                                 </a>
                                             </h4>
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
-                                                    <a href="single.html"><i class="fa fa-cutlery"></i><%= restaurant.category.displayText %></a>
+                                                    <a href="single.html"><i class="fa fa-cutlery"></i><%= business.category.displayText %></a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a href="#"><i class="fa fa-location-arrow"></i><%= restaurant.location %> </a>
+                                                    <a href="#"><i class="fa fa-location-arrow"></i><%= business.location %> </a>
                                                 </li>
                                             </ul>
                                             <p class="card-text">
-                                                <%= restaurant.shortText %>
+                                                <%= business.shortText %>
                                             </p>
                                             <div class="product-ratings">
                                                 <ul class="list-inline">
@@ -121,8 +121,8 @@
 
     <script>
         const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
-        const restaurants = {
-            features: <%- JSON.stringify(restaurants) %>
+        const businesses = {
+            features: <%- JSON.stringify(businesses) %>
         };
     </script>
     <script src="/js/clusterMap.js"></script>

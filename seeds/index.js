@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Restaurant = require('../models/restaurant');
+const Business = require('../models/business');
 const cities = require('./cities');
-const { restaurants } = require('./seedHelpers');
+const { businesses } = require('./seedHelpers');
 
 mongoose.connect('mongodb://localhost:27017/iLocale')
 const db = mongoose.connection;
@@ -11,11 +11,11 @@ db.once('open', () => { console.log('Database connected'); });
 const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async() => {
-    await Restaurant.deleteMany({});
+    await Business.deleteMany({});
     for (let i = 0; i < 9; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
-        const restaurant = new Restaurant({
-            author: '61e4e0366a75a5fdf7c221e5', //61e4e0366a75a5fdf7c221e5, 61e10fa6e4983cd57cd5be92
+        const business = new Business({
+            author: '61e10fa6e4983cd57cd5be92', //61e4e0366a75a5fdf7c221e5, 61e10fa6e4983cd57cd5be92
             location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
             geometry: {
                 type: 'Point',
@@ -24,8 +24,8 @@ const seedDB = async() => {
                     cities[rand1000].latitude
                 ]
             },
-            category: '61e7ae87ccc1bbbb0a25b726',
-            title: `${sample(restaurants)}`,
+            category: '61e7d86ad931da6487316924', //61e7d86ad931da6487316924, 61e7ae87ccc1bbbb0a25b726
+            title: `${sample(businesses)}`,
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, unde cupiditate! Aliquid quidem nostrum enim molestias nulla eius consequatur consectetur eligendi pariatur. Fuga atque error explicabo obcaecati, debitis quaerat doloremque.',
             images: [{
                 url: 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg',
@@ -33,7 +33,7 @@ const seedDB = async() => {
                 originalName: 'yum2.jpg'
             }]
         });
-        await restaurant.save();
+        await business.save();
     }
 }
 

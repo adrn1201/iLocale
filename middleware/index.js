@@ -1,7 +1,7 @@
-const Restaurant = require('../models/restaurant');
+const Business = require('../models/business');
 const Review = require('../models/review');
 const Category = require('../models/category');
-const { restaurantSchema, reviewSchema } = require('../schemas');
+const { businessSchema, reviewSchema } = require('../schemas');
 const AppError = require('../utils/AppError');
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -13,8 +13,8 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
-module.exports.validateRestaurant = (req, res, next) => {
-    const { error } = restaurantSchema.validate(req.body);
+module.exports.validateBusiness = (req, res, next) => {
+    const { error } = businessSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
         throw new AppError(msg, 400);
@@ -25,10 +25,10 @@ module.exports.validateRestaurant = (req, res, next) => {
 
 module.exports.isAuthor = async(req, res, next) => {
     const { id } = req.params
-    const restaurant = await Restaurant.findById(id);
-    if (!restaurant.author.equals(req.user._id)) {
+    const business = await Business.findById(id);
+    if (!business.author.equals(req.user._id)) {
         req.flash('error', 'You Do not Have Permission to Do That!');
-        return res.redirect(`/restaurants/${restaurant._id}`);
+        return res.redirect(`/businesses/${business._id}`);
     }
     next();
 }
@@ -48,14 +48,14 @@ module.exports.isReviewAuthor = async(req, res, next) => {
     const review = await Review.findById(reviewId);
     if (!review.author.equals(req.user._id)) {
         req.flash('error', 'You Do not Have Permission to Do That!');
-        return res.redirect(`/restaurants/${id}`);
+        return res.redirect(`/businesses/${id}`);
     }
     next();
 }
 
 module.exports.isCategoryAuthor = async(req, res, next) => {
     const { id } = req.params;
-    const category = await Restaurant.findById(id);
+    const category = await Category.findById(id);
     if (!category.author.equals(req.user._id)) {
         req.flash('error', 'You Do not Have Permission to Do That!');
         return res.redirect(`/admin/categories`);

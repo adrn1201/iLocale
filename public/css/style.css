@@ -711,8 +711,20 @@ ul.pagination .active a {
     padding: 6px 20px !important;
 }
 
+.add-listing-button {
+    background: #28a745;
+    color: #fff;
+    margin-right: 8px;
+    padding: 6px 20px !important;
+}
+
+.add-listing-button:hover {
+    color: #fff;
+}
+
 @media (max-width: 400px) {
-    .login-button {
+    .login-button,
+    .add-listing-button {
         display: inline-block;
         padding: 6px 45px !important;
         margin: 5px 0;
@@ -720,7 +732,8 @@ ul.pagination .active a {
 }
 
 @media (max-width: 480px) {
-    .login-button {
+    .login-button,
+    .add-listing-button {
         display: inline-block;
         padding: 6px 45px !important;
         margin: 5px 0;
@@ -728,7 +741,8 @@ ul.pagination .active a {
 }
 
 @media (max-width: 768px) {
-    .login-button {
+    .login-button,
+    .add-listing-button {
         display: inline-block;
         padding: 6px 45px !important;
         margin: 5px 0;
@@ -736,7 +750,8 @@ ul.pagination .active a {
 }
 
 @media (max-width: 992px) {
-    .login-button {
+    .login-button,
+    .add-listing-button {
         display: inline-block;
         padding: 6px 45px !important;
         margin: 5px 0;
@@ -748,6 +763,13 @@ ul.pagination .active a {
     color: #fff;
     padding: 8px 20px !important;
     display: inline-block;
+}
+
+.logout-button {
+    border: 2px solid #dedede;
+    margin-right: 8px;
+    display: inline-block;
+    padding: 4px 20px !important;
 }
 
 .add-button:hover {
@@ -2544,25 +2566,25 @@ article.single-post p {
     margin-top: -5px;
 }
 
-.ad-post form fieldset input:focus {
+.record-area form fieldset input:focus {
     outline: 0;
 }
 
-.ad-post form fieldset label {
+.record-area form fieldset label {
     margin-bottom: 0;
 }
 
-.ad-post .choose-file {
+.record-area .choose-file {
     cursor: pointer;
     display: block;
     border: 3px dashed #eaedef;
 }
 
-.ad-post .choose-file .select-files {
+.record-area .choose-file .select-files {
     border-radius: 45px;
 }
 
-.ad-post textarea {
+.record-area textarea {
     height: 200px;
 }
 

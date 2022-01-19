@@ -18,7 +18,7 @@ imageSchema.virtual('selection').get(function() {
 
 const opts = { toJSON: { virtuals: true } };
 
-const restaurantSchema = new Schema({
+const businessSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -57,17 +57,17 @@ const restaurantSchema = new Schema({
     }
 }, opts);
 
-restaurantSchema.virtual('properties.popUpMarkup').get(function() {
+businessSchema.virtual('properties.popUpMarkup').get(function() {
     return `
-        <strong><a href="/restaurants/${this._id}">${this.title}</a></strong>
+        <strong><a href="/businesses/${this._id}">${this.title}</a></strong>
         <p>${this.description.substring(0, 20)}...</p>`;
 });
 
-restaurantSchema.virtual('shortText').get(function() {
+businessSchema.virtual('shortText').get(function() {
     return `${this.description.substring(0, 30)}...`
 })
 
-restaurantSchema.post('findOneAndDelete', async(doc) => {
+businessSchema.post('findOneAndDelete', async(doc) => {
     if (doc) {
         await Review.deleteMany({
             _id: {
@@ -78,4 +78,4 @@ restaurantSchema.post('findOneAndDelete', async(doc) => {
 });
 
 
-module.exports = mongoose.model('Restaurant', restaurantSchema);
+module.exports = mongoose.model('Business', businessSchema);

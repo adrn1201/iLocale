@@ -9,7 +9,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const userRoutes = require('./routes/users');
 const adminRoutes = require('./routes/categories');
-const restaurantRoutes = require('./routes/restaurants');
+const businessRoutes = require('./routes/businesses');
 const reviewRoutes = require('./routes/reviews');
 const AppError = require('./utils/AppError');
 const session = require('express-session');
@@ -72,8 +72,8 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes);
 app.use('/admin/categories', adminRoutes);
-app.use('/restaurants', restaurantRoutes);
-app.use('/restaurants/:id/reviews', reviewRoutes);
+app.use('/businesses', businessRoutes);
+app.use('/businesses/:id/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
     res.render('home');

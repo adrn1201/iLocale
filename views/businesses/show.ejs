@@ -37,23 +37,23 @@
                 <div class="col-md-8">
                     <div class="product-details">
                         <h1 class="product-title">
-                            <%= restaurant.title %>
+                            <%= business.title %>
                         </h1>
                         <div class="product-meta">
                             <ul class="list-inline">
                                 <li class="list-inline-item"><i class="fa fa-user-o"></i> By
                                     <a href="">
-                                        <%= restaurant.author.username %>
+                                        <%= business.author.username %>
                                     </a>
                                 </li>
                                 <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category
                                     <a href="">
-                                        <%= restaurant.category.displayText %>
+                                        <%= business.category.displayText %>
                                     </a>
                                 </li>
                                 <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location
                                     <a href="">
-                                        <%= restaurant.location %>
+                                        <%= business.location %>
                                     </a>
                                 </li>
                             </ul>
@@ -61,7 +61,7 @@
 
                         <!-- product slider -->
                         <div class="product-slider">
-                            <% for(let imgs of restaurant.images){ %>
+                            <% for(let imgs of business.images){ %>
                                 <div class="product-slider-item mt-4" style="margin-bottom: 8em;" data-image="<%= imgs.carousel %>">
                                     <img class="img-fluid w-100" src="<%= imgs.carousel %>" alt="product-img">
                                 </div>
@@ -84,7 +84,7 @@
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                     <h3 class="tab-title">Description</h3>
                                     <p>
-                                        <%= restaurant.description %>
+                                        <%= business.description %>
                                     </p>
 
                                 </div>
@@ -95,7 +95,7 @@
                                             <div class="review-submission">
                                                 <h3 class="tab-title">Submit your review</h3>
                                                 <div class="review-submit">
-                                                    <form action="/restaurants/<%= restaurant._id %>/reviews" method="POST" class="row needs-validation" novalidate>
+                                                    <form action="/businesses/<%= business._id %>/reviews" method="POST" class="row needs-validation" novalidate>
                                                         <fieldset class="starability-basic" id="star-form">
                                                             <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
                                                             <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -120,9 +120,9 @@
                                                 </div>
                                             </div>
                                             <% } %>
-                                                <h3 class="tab-title <%= !currentUser ? '' : 'mt-5' %>">Restaurant Reviews</h3>
-                                                <% if(restaurant.reviews.length){ %>
-                                                    <% for(let review of restaurant.reviews){ %>
+                                                <h3 class="tab-title <%= !currentUser ? '' : 'mt-5' %>">Reviews</h3>
+                                                <% if(business.reviews.length){ %>
+                                                    <% for(let review of business.reviews){ %>
                                                         <div class="media">
                                                             <div class="media-body">
                                                                 <div class="row">
@@ -137,7 +137,7 @@
                                                                             <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             </a>
                                                                             <div class="dropdown-menu" id="review-options">
-                                                                                <form action="/restaurants/<%= restaurant._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                                                                <form action="/businesses/<%= business._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
                                                                                     <button class="dropdown-item" id="option-delete">Delete</button>
                                                                                 </form>
                                                                             </div>
@@ -176,12 +176,12 @@
                 <div class="col-md-4" id="show-sidebar">
                     <div class="sidebar sticky-top">
                         <div id='map'></div>
-                        <% if(currentUser && restaurant.author.equals(currentUser._id)){ %>
+                        <% if(currentUser && business.author.equals(currentUser._id)){ %>
                             <div class="widget user text-center mt-4" id="post-controls">
                                 <ul class="list-inline mt-20">
-                                    <li class="list-inline-item"><a href="/restaurants/<%= restaurant._id%>/edit" class="btn btn-contact d-inline-block  btn-info px-lg-3 my-1 px-md-3">Edit Post</a></li>
+                                    <li class="list-inline-item"><a href="/businesses/<%= business._id%>/edit" class="btn btn-contact d-inline-block  btn-info px-lg-3 my-1 px-md-3">Edit Post</a></li>
                                     <li class="list-inline-item">
-                                        <form action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
+                                        <form action="/businesses/<%= business._id %>?_method=DELETE" method="POST">
                                             <button class="btn btn-offer btn-danger ml-n1 my-1 px-lg-4 px-md-3">Delete Post</button>
                                         </form>
                                     </li>
@@ -197,7 +197,7 @@
 
     <script>
         const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
-        const restaurant = <%- JSON.stringify(restaurant) %>;
+        const business = <%- JSON.stringify(business) %>;
     </script>
 
     <script src="/js/showPageMap.js"></script>

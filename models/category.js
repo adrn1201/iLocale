@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Restaurant = require('./restaurant');
+const Business = require('./business');
 
 const categorySchema = new Schema({
     categoryName: {
@@ -11,9 +11,9 @@ const categorySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    restaurants: [{
+    businesses: [{
         type: Schema.Types.ObjectId,
-        ref: 'Restaurant'
+        ref: 'Business'
     }]
 });
 
@@ -23,7 +23,7 @@ categorySchema.virtual('displayText').get(function() {
 
 categorySchema.post('findOneAndDelete', async(doc) => {
     if (doc) {
-        await Restaurant.deleteMany({ _id: { $in: doc.restaurants } })
+        await Business.deleteMany({ _id: { $in: doc.businesses } })
     }
 });
 
