@@ -24,7 +24,7 @@ const seedDB = async() => {
                     cities[rand1000].latitude
                 ]
             },
-            category: '61e7d86ad931da6487316924', //61e7d86ad931da6487316924, 61e7ae87ccc1bbbb0a25b726
+            category: '61e8fe6ed6b492756de6a704', //61e7d86ad931da6487316924, 61e7ae87ccc1bbbb0a25b726
             title: `${sample(businesses)}`,
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, unde cupiditate! Aliquid quidem nostrum enim molestias nulla eius consequatur consectetur eligendi pariatur. Fuga atque error explicabo obcaecati, debitis quaerat doloremque.',
             images: [{

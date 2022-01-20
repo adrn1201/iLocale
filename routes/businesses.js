@@ -11,7 +11,7 @@ router.route('/')
     .get(catchAsync(businesses.index))
     .post(isLoggedIn, upload.array('image'), validateBusiness, catchAsync(businesses.createBusiness));
 
-router.get('/new', isLoggedIn, businesses.renderNewForm);
+router.get('/new', isLoggedIn, catchAsync(businesses.renderNewForm));
 
 router.route('/:id')
     .get(catchAsync(businesses.showBusinesses))

@@ -20,12 +20,17 @@ module.exports.createBusiness = async(req, res) => {
         query: req.body.business.location,
         limit: 1
     }).send()
-    const business = new Business(req.body.business);
-    business.geometry = geoData.body.features[0].geometry;
-    business.category = req.body.business.category;
-    business.images = req.files.map(f => ({ url: f.path, filename: f.filename, originalName: f.originalname }));
-    business.author = req.user._id;
+    const category = await Category.findById(req.body.business.category);
+    const business = new Business({
+        ...req.body.business,
+        geometry: geoData.body.features[0].geometry,
+        category: req.body.business.category,
+        images: req.files.map(f => ({ url: f.path, filename: f.filename, originalName: f.originalname })),
+        author: req.user._id
+    });
+    category.businesses.push(business);
     await business.save();
+    await category.save();
     req.flash('success', 'Successfully Created a New Post!');
     res.redirect(`/businesses/${business._id}`);
 };
@@ -70,7 +75,9 @@ module.exports.updateBusiness = async(req, res) => {
 
 module.exports.deleteBusiness = async(req, res) => {
     const { id } = req.params;
-    await Business.findByIdAndDelete(id);
+    const business = await Business.findById(id);
+    await Category.findByIdAndUpdate(business.category, { $pull: { businesses: id } });
+    await Business.findByIdAndDelete({ _id: business._id });
     req.flash('success', 'Successfully Deleted Post!');
     res.redirect('/businesses');
 };
