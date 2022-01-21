@@ -6,8 +6,17 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async(req, res) => {
-    const businesses = await Business.find({}).populate('category');
-    res.render('businesses/index', { businesses });
+    const { title, location } = req.query;
+    if (title || location) {
+        const businesses = await Business
+            .find({ $or: [{ title }, { location }] })
+            .collation({ locale: 'en', strength: 2 })
+            .populate('category');
+        res.render('businesses/index', { businesses });
+    } else {
+        const businesses = await Business.find({}).populate('category');
+        res.render('businesses/index', { businesses });
+    }
 };
 
 module.exports.renderNewForm = async(req, res) => {
