@@ -12,10 +12,10 @@ module.exports.index = async(req, res) => {
             .find({ $or: [{ title }, { location }] })
             .collation({ locale: 'en', strength: 2 })
             .populate('category');
-        res.render('businesses/index', { businesses });
+        res.render('businesses/index', { businesses, title, location });
     } else {
         const businesses = await Business.find({}).populate('category');
-        res.render('businesses/index', { businesses });
+        res.render('businesses/index', { businesses, title: '', location: '' });
     }
 };
 

@@ -1,25 +1,21 @@
 <% layout('layouts/boilerplate') %>
-    <div id="clusterMap" style="width: 100%; height: 500px"></div>
     <section class="page-search">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advance Search -->
                     <div class="advance-search">
-                        <form>
+                        <form action="/businesses" method="GET">
                             <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input type="text" name="title" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for" value="<%= title ? title : ''%>">
+                                </div>
                                 <div class="form-group col-md-4">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
+                                    <input type="text" name="location" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location" value="<%= location ? location : ''%>">
                                 </div>
                                 <div class="form-group col-md-2">
 
-                                    <button type="submit" class="btn btn-primary">Search Now</button>
+                                    <button type="submit" class="btn btn-info">Search</button>
                                 </div>
                             </div>
                         </form>
@@ -29,94 +25,125 @@
         </div>
     </section>
     <section class="section-sm">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="search-result bg-gray">
-                        <h2>Results For "Electronics"</h2>
-                        <p>123 Results on 12 December, 2017</p>
+        <div class="container-fluid">
+            <% if(title || location){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="search-result bg-gray">
+                            <h2>Search Results For "<%= title.charAt(0).toUpperCase() + title.slice(1) %>"</h2>
+                            <!-- <p>123 Results on 12 December, 2017</p> -->
+                        </div>
                     </div>
                 </div>
-            </div>
-            <%# <div class="row">
-                <div class="col-md-3">
-                    add side bar category if needed %>
-                <div class="product-grid-list">
-                    <div class="row mt-30">
-                        <% for(const business of businesses) { %>
-                            <div class="col-sm-12 col-lg-4 col-md-6">
-                                <!-- product card -->
-                                <div class="product-item bg-light">
-                                    <div class="card">
-                                        <div class="thumb-content">
-                                            <!-- <div class="price">$200</div> -->
-                                            <% if(business.images.length){ %>
-                                                <a href="/businesses/<%=business._id %>">
-                                                <img class="card-img-top img-fluid" src="<%= business.images[0].url %>" alt="Card image cap">
-                                            </a>
-                                                <% } else{ %>
-                                                    <a href="/businesses/<%=business._id %>">
-                                                        <img class="card-img-top img-fluid" src="https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg" alt="Card image cap">
-                                                        <% } %>
+                <% } %>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3">
+                            <div class="category-sidebar" id="sidebar-cat">
+                                <div class="widget category-list">
+                                    <h4 class="widget-header">All Category</h4>
+                                    <ul class="category-list">
+                                        <li><a href="category.html">Laptops <span>93</span></a></li>
+                                        <li><a href="category.html">Iphone <span>233</span></a></li>
+                                        <li><a href="category.html">Microsoft  <span>183</span></a></li>
+                                        <li><a href="category.html">Monitors <span>343</span></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="widget product-shorting">
+                                    <h4 class="widget-header">By Condition</h4>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              Brand New
+                            </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              Almost New
+                            </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              Gently New
+                            </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              Havely New
+                            </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-5">
+                            <div class="category-search-filter">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Sort</strong>
+                                        <select>
+                                <option>Most Recent</option>
+                                <option value="1">Most Popular</option>
+                                <option value="2">Lowest Price</option>
+                                <option value="4">Highest Price</option>
+                            </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <% for(const business of businesses){ %>
+                                <div class="biz-listing-list mt-20">
+                                    <div class="row p-lg-3 p-sm-5 p-4">
+                                        <div class="col-lg-4 align-self-center">
+                                            <a href="/businesses/<%=business._id  %>">
+                                        <img src="<%= business.images.length ? business.images[0].url : 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg" alt="Card image cap'%>" class="img-fluid" alt="">
+                                    </a>
                                         </div>
-                                        <div class="card-body">
-                                            <h4 class="card-title">
-                                                <a href="/businesses/<%=business._id %>">
-                                                    <%= business.title %>
-                                                </a>
-                                            </h4>
-                                            <ul class="list-inline product-meta">
-                                                <li class="list-inline-item">
-                                                    <a href="single.html"><i class="fa fa-cutlery"></i><%= business.category.displayText %></a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="#"><i class="fa fa-location-arrow"></i><%= business.location %> </a>
-                                                </li>
-                                            </ul>
-                                            <p class="card-text">
-                                                <%= business.shortText %>
-                                            </p>
-                                            <div class="product-ratings">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                </ul>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-10">
+                                                    <div class="ad-listing-content">
+                                                        <div>
+                                                            <a href="/businesses/<%=business._id  %>" class="font-weight-bold">
+                                                                <%= business.title %>
+                                                            </a>
+                                                        </div>
+                                                        <ul class="list-inline mt-2 mb-3">
+                                                            <li class="list-inline-item">
+                                                                <a href="category.html"> <i class="fa fa-folder-open-o"></i>
+                                                                    <%= business.category ? business.category.displayText : 'N/A' %>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
+                                                        </ul>
+                                                        <p class="pr-5">
+                                                            <%= business.shortText %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 align-self-center">
+                                                    <div class="product-ratings float-lg-right pb-3">
+                                                        <ul class="list-inline">
+                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <% } %>
-
+                                <% } %>
+                        </div>
+                        <div id="clusterMap" class="col-md-3"></div>
                     </div>
-                </div>
-                <div class="pagination justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
         </div>
-        </div>
-        </div>
+
     </section>
 
     <script>

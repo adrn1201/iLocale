@@ -2588,11 +2588,11 @@ article.single-post p {
     height: 200px;
 }
 
-.ad-listing-list {
+.biz-listing-list {
     transition: all linear 0.3s;
 }
 
-.ad-listing-list:hover {
+.biz-listing-list:hover {
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -2839,4 +2839,10 @@ form textarea {
 
 .label-edit {
     font-size: 1rem;
+}
+
+#sidebar-cat {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5px;
 }
