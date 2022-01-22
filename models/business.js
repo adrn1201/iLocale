@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Review = require('./review');
 
 const imageSchema = new Schema({
@@ -77,5 +78,6 @@ businessSchema.post('findOneAndDelete', async(doc) => {
     }
 });
 
+businessSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Business', businessSchema);

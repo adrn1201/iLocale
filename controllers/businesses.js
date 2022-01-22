@@ -6,18 +6,57 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async(req, res) => {
-    const { title, location } = req.query;
-    if (title || location) {
-        const businesses = await Business
-            .find({ $or: [{ title }, { location }] })
-            .collation({ locale: 'en', strength: 2 })
-            .populate('category');
-        res.render('businesses/index', { businesses, title, location });
-    } else {
-        const businesses = await Business.find({}).populate('category');
-        res.render('businesses/index', { businesses, title: '', location: '' });
+        const { title, location } = req.query;
+        if (!req.query.page) {
+            if (title || location) {
+                const businesses = await Business
+                    .paginate({ $or: [{ title }, { location }] }, {
+                        populate: {
+                            path: 'category'
+                        },
+                        collation: {
+                            locale: 'en',
+                            strength: 2
+                        }
+                    })
+                res.render('businesses/index', { businesses, title, location });
+            } else {
+                const businesses = await Business.paginate({}, {
+                    populate: {
+                        path: 'category'
+                    }
+                });
+                res.render('businesses/index', { businesses, title: '', location: '' })
+            }
+        } else {
+            const { page } = req.query;
+            const businesses = await Business.paginate({}, {
+                page,
+                populate: {
+                    path: 'category'
+                }
+            });
+            console.log(businesses);
+            res.status(200).json(businesses);
+        }
     }
-};
+    // if (title || location) {
+    //     const businesses = await Business
+    //         .find({ $or: [{ title }, { location }] })
+    //         .collation({ locale: 'en', strength: 2 })
+    //         .populate('category');
+    //     res.render('businesses/index', { businesses, title, location });
+    // } else {
+    //     const businesses = await Business.paginate({}, {
+    //         populate: {
+    //             path: 'category'
+    //         }
+    //     });
+    //     console.log(businesses);
+    //     // res.send(businesses);
+    //     res.render('businesses/index', { businesses, title: '', location: '' });
+    // }
+    // };
 
 module.exports.renderNewForm = async(req, res) => {
     const categories = await Category.find({});

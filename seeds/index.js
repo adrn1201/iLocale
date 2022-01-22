@@ -12,7 +12,7 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async() => {
     await Business.deleteMany({});
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 60; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         const business = new Business({
             author: '61e10fa6e4983cd57cd5be92', //61e4e0366a75a5fdf7c221e5, 61e10fa6e4983cd57cd5be92

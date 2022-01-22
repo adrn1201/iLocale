@@ -80,7 +80,7 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-7 col-md-5">
+                        <div class="col-lg-7 col-md-5" id="businesses-container">
                             <div class="category-search-filter">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -107,13 +107,14 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <% for(const business of businesses){ %>
+                            <% for(const business of businesses.docs){ %>
                                 <div class="biz-listing-list mt-20">
                                     <div class="row p-lg-3 p-sm-5 p-4">
                                         <div class="col-lg-4 align-self-center">
                                             <a href="/businesses/<%=business._id  %>">
-                                        <img src="<%= business.images.length ? business.images[0].url : 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg" alt="Card image cap'%>" class="img-fluid" alt="">
-                                    </a>
+                                                <img src="<%= business.images.length ? business.images[0].url : 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg'%>" class="img-fluid"
+                                                alt="Card image cap">
+                                            </a>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="row">
@@ -159,11 +160,15 @@
         </div>
 
     </section>
-
+    <div class="text-center mb-5" id="generate-data">
+        <a href="/businesses?page=<%= businesses.nextPage %>" id="paginate" class="btn btn-primary">Load More</a>
+    </div>
     <script>
         const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
         const businesses = {
-            features: <%- JSON.stringify(businesses) %>
+            features: <%- JSON.stringify(businesses.docs) %>
         };
     </script>
     <script src="/js/clusterMap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/pagination.js"></script>
