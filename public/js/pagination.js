@@ -42,7 +42,7 @@ function generateBusiness(business) {
                         <ul class="list-inline mt-2 mb-3">
                             <li class="list-inline-item">
                                 <a href="category.html"> <i class="fa fa-folder-open-o"></i>
-                                    ${business.category ? business.category.displayText : 'N/A'}
+                                    ${business.category.categoryName.charAt(0).toUpperCase() + business.category.categoryName.slice(1)}
                                 </a>
                             </li>
                             <li class="list-inline-item"><a href=""><i class="fa fa-location-arrow"></i> ${business.location}</a></li>
