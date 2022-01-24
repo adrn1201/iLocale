@@ -2846,3 +2846,7 @@ form textarea {
     position: sticky;
     top: 5px;
 }
+
+#review-paginate:hover {
+    text-decoration: underline;
+}

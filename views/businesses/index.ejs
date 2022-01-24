@@ -1,99 +1,75 @@
 <% layout('layouts/boilerplate') %>
-    <section class="page-search">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advance Search -->
-                    <div class="advance-search">
-                        <form action="/businesses" method="GET">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" name="title" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for" value="<%= title ? title : ''%>">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input type="text" name="location" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location" value="<%= location ? location : ''%>">
-                                </div>
-                                <div class="form-group col-md-2">
-
-                                    <button type="submit" class="btn btn-info">Search</button>
-                                </div>
+    <%- include('../partials/advance-search')%>
+        <section class="section-sm">
+            <div class="container-fluid">
+                <% if(title || location){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="search-result bg-gray">
+                                <h2>Search Results For
+                                    <%= title ? `"${title.charAt(0).toUpperCase() + title.slice(1)}"` : '' %>
+                                        <%= location ? `and "${location}"` : '' %>
+                                </h2>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section-sm">
-        <div class="container-fluid">
-            <% if(title || location){ %>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="search-result bg-gray">
-                            <h2>Search Results For
-                                <%= title ? `"${title.charAt(0).toUpperCase() + title.slice(1)}"` : '' %>
-                                    <%= location ? `and "${location}"` : '' %>
-                            </h2>
                         </div>
                     </div>
-                </div>
-                <% } %>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-3">
-                            <div class="category-sidebar" id="sidebar-cat">
-                                <div class="widget category-list">
-                                    <h4 class="widget-header">All Category</h4>
-                                    <ul class="category-list">
-                                        <li><a href="category.html">Laptops <span>93</span></a></li>
-                                        <li><a href="category.html">Iphone <span>233</span></a></li>
-                                        <li><a href="category.html">Microsoft  <span>183</span></a></li>
-                                        <li><a href="category.html">Monitors <span>343</span></a></li>
-                                    </ul>
-                                </div>
+                    <% } %>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-3">
+                                <div class="category-sidebar" id="sidebar-cat">
+                                    <div class="widget category-list">
+                                        <h4 class="widget-header">All Category</h4>
+                                        <ul class="category-list">
+                                            <li><a href="category.html">Laptops <span>93</span></a></li>
+                                            <li><a href="category.html">Iphone <span>233</span></a></li>
+                                            <li><a href="category.html">Microsoft  <span>183</span></a></li>
+                                            <li><a href="category.html">Monitors <span>343</span></a></li>
+                                        </ul>
+                                    </div>
 
-                                <div class="widget product-shorting">
-                                    <h4 class="widget-header">By Condition</h4>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
+                                    <div class="widget product-shorting">
+                                        <h4 class="widget-header">By Condition</h4>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="">
                               Brand New
                             </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="">
                               Almost New
                             </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="">
                               Gently New
                             </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="">
                               Havely New
                             </label>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-7 col-md-5" id="businesses-container">
-                            <div class="category-search-filter">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <strong>Sort</strong>
-                                        <select>
+                            <div class="col-lg-7 col-md-5" id="businesses-container">
+                                <div class="category-search-filter">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong>Sort</strong>
+                                            <select>
                                             <option>Most Recent</option>
                                             <option value="1">Most Popular</option>
                                             <option value="2">Lowest Price</option>
                                             <option value="4">Highest Price</option>
                                         </select>
-                                    </div>
-                                    <!-- <div class="col-md-6">
+                                        </div>
+                                        <!-- <div class="col-md-6">
                                         <div class="view">
                                             <strong>Views</strong>
                                             <ul class="list-inline view-switcher">
@@ -106,72 +82,72 @@
                                             </ul>
                                         </div>
                                     </div> -->
+                                    </div>
                                 </div>
-                            </div>
-                            <% for(const business of businesses.docs){ %>
-                                <div class="biz-listing-list mt-20">
-                                    <div class="row p-lg-3 p-sm-5 p-4">
-                                        <div class="col-lg-4 align-self-center">
-                                            <a href="/businesses/<%=business._id  %>">
+                                <% for(const business of businesses.docs){ %>
+                                    <div class="biz-listing-list mt-20">
+                                        <div class="row p-lg-3 p-sm-5 p-4">
+                                            <div class="col-lg-4 align-self-center">
+                                                <a href="/businesses/<%=business._id  %>">
                                                 <img src="<%= business.images.length ? business.images[0].url : 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg'%>" class="img-fluid"
                                                 alt="Card image cap">
                                             </a>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-10">
-                                                    <div class="ad-listing-content">
-                                                        <div>
-                                                            <a href="/businesses/<%=business._id  %>" class="font-weight-bold">
-                                                                <%= business.title %>
-                                                            </a>
-                                                        </div>
-                                                        <ul class="list-inline mt-2 mb-3">
-                                                            <li class="list-inline-item">
-                                                                <a href="category.html"> <i class="fa fa-folder-open-o"></i>
-                                                                    <%= business.category ? business.category.displayText : 'N/A' %>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-10">
+                                                        <div class="ad-listing-content">
+                                                            <div>
+                                                                <a href="/businesses/<%=business._id  %>" class="font-weight-bold">
+                                                                    <%= business.title %>
                                                                 </a>
-                                                            </li>
-                                                            <li class="list-inline-item"><a href=""><i class="fa fa-location-arrow"></i> <%=business.location %></a></li>
-                                                        </ul>
-                                                        <p class="pr-5">
-                                                            <%= business.shortText %>
-                                                        </p>
+                                                            </div>
+                                                            <ul class="list-inline mt-2 mb-3">
+                                                                <li class="list-inline-item">
+                                                                    <a href="category.html"> <i class="fa fa-folder-open-o"></i>
+                                                                        <%= business.category ? business.category.displayText : 'N/A' %>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-inline-item"><a href=""><i class="fa fa-location-arrow"></i> <%=business.location %></a></li>
+                                                            </ul>
+                                                            <p class="pr-5">
+                                                                <%= business.shortText %>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6 align-self-center">
-                                                    <div class="product-ratings float-lg-right pb-3">
-                                                        <ul class="list-inline">
-                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        </ul>
+                                                    <div class="col-lg-6 align-self-center">
+                                                        <div class="product-ratings float-lg-right pb-3">
+                                                            <ul class="list-inline">
+                                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <% } %>
+                                    <% } %>
+                            </div>
+                            <div id="clusterMap"></div>
                         </div>
-                        <div id="clusterMap"></div>
-                    </div>
-        </div>
+            </div>
 
-    </section>
-    <% if(businesses.hasNextPage){ %>
-        <div class="text-center mb-5" id="generate-data">
-            <a href="/businesses?page=<%= businesses.nextPage %><%= title ? `&title=${title}` : ''%><%= location ? `&location=${location}` : '' %>" id="paginate" class="btn btn-primary">Load More</a>
-        </div>
-        <% } %>
-            <script>
-                const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
-                const businesses = {
-                    features: <%- JSON.stringify(businesses.docs) %>
-                };
-            </script>
-            <script src="/js/clusterMap.js"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-            <script src="/js/pagination.js"></script>
+        </section>
+        <% if(businesses.hasNextPage){ %>
+            <div class="text-center mb-5" id="generate-data">
+                <a href="/businesses?page=<%= businesses.nextPage %><%= title ? `&title=${title}` : ''%><%= location ? `&location=${location}` : '' %>" id="paginate" class="btn btn-primary">Load More</a>
+            </div>
+            <% } %>
+                <script>
+                    const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
+                    const businesses = {
+                        features: <%- JSON.stringify(businesses.docs) %>
+                    };
+                </script>
+                <script src="/js/clusterMap.js"></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                <script src="/js/indexPagination.js"></script>

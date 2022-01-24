@@ -62,6 +62,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+    res.locals.title = req.query.title;
+    res.locals.location = req.query.location
     res.locals.path = req.path;
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');

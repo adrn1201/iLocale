@@ -1,5 +1,6 @@
 const Business = require('../models/business');
 const Category = require('../models/category');
+const Review = require('../models/review');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
@@ -25,13 +26,16 @@ module.exports.index = async(req, res) => {
                 path: 'category'
             }
         });
-        console.log(businesses);
         res.render('businesses/index', { businesses, title: '', location: '' })
     } else if (page && (title || location)) {
         const businesses = await Business.paginate({ $or: [{ title }, { location }] }, {
             page,
             populate: {
                 path: 'category'
+            },
+            collation: {
+                locale: 'en',
+                strength: 2
             }
         });
         res.status(200).json(businesses);
@@ -73,17 +77,31 @@ module.exports.createBusiness = async(req, res) => {
 
 module.exports.showBusinesses = async(req, res) => {
     const { id } = req.params;
-    const business = await Business.findById(id).populate('category').populate({
-        path: 'reviews',
-        populate: {
-            path: 'author'
-        }
-    }).populate('author');
+    const { page } = req.query;
+    const business = await Business.findById(id).populate('category').populate('author');
     if (!business) {
         req.flash('error', 'Cannot find that business!');
         return res.redirect('/businesses');
     }
-    res.render('businesses/show', { business });
+
+    if (page) {
+        const reviews = await Review.paginate({ _id: { $in: business.reviews } }, {
+            page,
+            populate: {
+                path: 'author'
+            },
+            limit: 5
+        });
+        res.status(200).json(reviews);
+    } else {
+        const reviews = await Review.paginate({ _id: { $in: business.reviews } }, {
+            populate: {
+                path: 'author'
+            },
+            limit: 5
+        });
+        res.render('businesses/show', { business, reviews });
+    }
 };
 
 module.exports.renderEditForm = async(req, res) => {
