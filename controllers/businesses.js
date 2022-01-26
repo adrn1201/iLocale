@@ -5,9 +5,17 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require('../cloudinary');
+const { sortValues } = require('../utils/sortValues');
 
 module.exports.index = async(req, res) => {
-    const { title, location, page } = req.query;
+    const { title, location, page, sortBy } = req.query;
+    const sort = {};
+
+    if (sortBy) {
+        const pages = sortBy.split(':');
+        sort[pages[0]] = pages[1] === 'desc' ? -1 : 1
+    }
+
     if (!page && (title || location)) {
         const businesses = await Business
             .paginate({ $or: [{ title }, { location }] }, {
@@ -17,16 +25,18 @@ module.exports.index = async(req, res) => {
                 collation: {
                     locale: 'en',
                     strength: 2
-                }
+                },
+                sort
             })
-        res.render('businesses/index', { businesses, title, location });
+        res.render('businesses/index', { businesses, title, location, displaySort: sortValues() });
     } else if (!page && (!title || !location)) {
         const businesses = await Business.paginate({}, {
             populate: {
                 path: 'category'
-            }
+            },
+            sort
         });
-        res.render('businesses/index', { businesses, title: '', location: '' })
+        res.render('businesses/index', { businesses, title: '', location: '', displaySort: sortValues() })
     } else if (page && (title || location)) {
         const businesses = await Business.paginate({ $or: [{ title }, { location }] }, {
             page,
@@ -36,7 +46,8 @@ module.exports.index = async(req, res) => {
             collation: {
                 locale: 'en',
                 strength: 2
-            }
+            },
+            sort
         });
         res.status(200).json(businesses);
     } else {
@@ -44,7 +55,8 @@ module.exports.index = async(req, res) => {
             page,
             populate: {
                 path: 'category'
-            }
+            },
+            sort
         });
         res.status(200).json(businesses);
     }
@@ -71,6 +83,7 @@ module.exports.createBusiness = async(req, res) => {
     category.businesses.push(business);
     await business.save();
     await category.save();
+    console.log(business);
     req.flash('success', 'Successfully Created a New Post!');
     res.redirect(`/businesses/${business._id}`);
 };
@@ -123,6 +136,7 @@ module.exports.updateBusiness = async(req, res) => {
         }
         await business.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } });
     }
+    console.log(business);
     req.flash('success', 'Successfully Updated Post!');
     res.redirect(`/businesses/${business._id}`);
 };

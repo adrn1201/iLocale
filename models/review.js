@@ -9,7 +9,7 @@ const reviewSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }
-});
+}, { timestamps: true });
 
 reviewSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Review', reviewSchema);

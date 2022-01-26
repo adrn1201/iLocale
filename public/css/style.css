@@ -2850,3 +2850,36 @@ form textarea {
 #review-paginate:hover {
     text-decoration: underline;
 }
+
+#selected-text {
+    font-size: 1rem;
+}
+
+#selected-text:hover {
+    text-decoration: underline;
+}
+
+#label-link {
+    font-size: 1rem;
+}
+
+#label-link::after {
+    content: none;
+}
+
+#label-link:hover {
+    color: black;
+}
+
+#label-link:visited {
+    color: black;
+}
+
+#sort-icon {
+    margin-left: 0.5em;
+}
+
+#set-dc {
+    color: black;
+    font-weight: 600;
+}

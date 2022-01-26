@@ -58,16 +58,23 @@
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-5" id="businesses-container">
-                                <div class="category-search-filter">
+                                <div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <strong>Sort</strong>
-                                            <select>
-                                            <option>Most Recent</option>
-                                            <option value="1">Most Popular</option>
-                                            <option value="2">Lowest Price</option>
-                                            <option value="4">Highest Price</option>
-                                        </select>
+                                            <div class="nav-item dropdown dropdown-slide">
+                                                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="label-link">
+                                                Sort: <span><strong id="selected-text"><%= sortBy === 'createdAt:desc' ? 'Most Recent' : 'Oldest' %></strong></span><span id="sort-icon"><i class="fa fa-angle-down" id="set-dc"></i></span>
+                                            </a>
+                                                <!-- Dropdown list -->
+                                                <div class="dropdown-menu w-25">
+                                                    <% for(const values of displaySort){ %>
+                                                        <a class="dropdown-item" href="/businesses?<%= title || location ? `${title && !location ? `title=${title}` : ''}${location && !title ? `location=${location}` : ''}${title && location ? `title=${title}&location=${location}` : ''}&sortBy=createdAt:${values.sortOrder}` 
+                                                    : `sortBy=createdAt:${values.sortOrder}` %>">
+                                                            <%= values.anchorValue  %>
+                                                        </a>
+                                                        <% } %>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- <div class="col-md-6">
                                         <div class="view">
@@ -139,7 +146,7 @@
         </section>
         <% if(businesses.hasNextPage){ %>
             <div class="text-center mb-5" id="generate-data">
-                <a href="/businesses?page=<%= businesses.nextPage %><%= title ? `&title=${title}` : ''%><%= location ? `&location=${location}` : '' %>" id="paginate" class="btn btn-primary">Load More</a>
+                <a href="/businesses?page=<%= businesses.nextPage %><%= title ? `&title=${title}` : ''%><%= location ? `&location=${location}` : '' %><%= sortBy ? `&sortBy=${sortBy}` : ''  %>" id="paginate" class="btn btn-primary">Load More</a>
             </div>
             <% } %>
                 <script>

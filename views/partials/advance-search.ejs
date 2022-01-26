@@ -7,11 +7,12 @@
                     <form action="/businesses" method="GET">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="text" name="title" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for" value="<%= title ? title : ''%>">
+                                <input type="text" name="title" class="form-control my-2 my-lg-0" id="title-inpt" placeholder="What are you looking for" value="<%= title ? title : ''%>">
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" name="location" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location" value="<%= location ? location : ''%>">
+                                <input type="text" name="location" class="form-control my-2 my-lg-0" id="location-inpt" placeholder="Location" value="<%= location ? location : ''%>">
                             </div>
+                            <input type="hidden" name="sortBy" value="<%= sortBy ? sortBy : ''%>" id="sort-inpt">
                             <div class="form-group col-md-2">
 
                                 <button type="submit" class="btn btn-info">Search</button>

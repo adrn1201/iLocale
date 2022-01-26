@@ -17,7 +17,7 @@ imageSchema.virtual('selection').get(function() {
     return this.url.replace('/upload', '/upload/w_450,h_450,c_scale,e_improve,e_sharpen');
 });
 
-const opts = { toJSON: { virtuals: true } };
+const opts = { toJSON: { virtuals: true }, timestamps: true };
 
 const businessSchema = new Schema({
     title: {

@@ -15,7 +15,7 @@ const categorySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Business'
     }]
-});
+}, { timestamps: true });
 
 categorySchema.virtual('displayText').get(function() {
     return this.categoryName.charAt(0).toUpperCase() + this.categoryName.slice(1)
