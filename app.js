@@ -7,11 +7,13 @@ const app = express();
 const ejsMate = require('ejs-mate');
 const path = require('path');
 const methodOverride = require('method-override');
+const Category = require('./models/category');
 const userRoutes = require('./routes/users');
 const adminRoutes = require('./routes/categories');
 const businessRoutes = require('./routes/businesses');
 const reviewRoutes = require('./routes/reviews');
 const AppError = require('./utils/AppError');
+const catchAsync = require('./utils/catchAsync');
 const session = require('express-session');
 const flash = require('connect-flash');
 const User = require('./models/user');
@@ -61,7 +63,13 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(catchAsync(async(req, res, next) => {
+    req.session.categories = await Category.find({});
+    next();
+}));
+
 app.use((req, res, next) => {
+    res.locals.categories = req.session.categories;
     res.locals.sortBy = req.query.sortBy;
     res.locals.title = req.query.title;
     res.locals.location = req.query.location

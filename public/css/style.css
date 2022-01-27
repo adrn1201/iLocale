@@ -2883,3 +2883,66 @@ form textarea {
     color: black;
     font-weight: 600;
 }
+
+.carousel-imgs {
+    margin-bottom: 8em;
+    margin-top: 24.5em;
+}
+
+@media(min-width: 400px) and (max-width: 500px) {
+    .carousel-imgs {
+        margin-top: 9em;
+    }
+}
+
+@media(min-width: 500px) and (max-width: 576px) {
+    .carousel-imgs {
+        margin-top: 12em;
+    }
+}
+
+@media(min-width: 576px) and (max-width: 755px) {
+    .carousel-imgs {
+        margin-top: 10em;
+    }
+}
+
+@media(min-width: 556px) and (max-width: 768px) {
+    .carousel-imgs {
+        margin-top: 10em;
+    }
+}
+
+@media(min-width: 768px) and (max-width: 992px) {
+    .carousel-imgs {
+        margin-top: 9em;
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1200px) {
+    .carousel-imgs {
+        margin-top: 18.5em;
+    }
+}
+
+@media(min-width: 1200px) {
+    .carousel-imgs {
+        margin-top: 24.5em;
+    }
+}
+
+.double-images {
+    margin-bottom: 14em;
+}
+
+.triple-images {
+    margin-bottom: 8em;
+}
+
+.four-images {
+    margin-bottom: 5em;
+}
+
+.five-images {
+    margin-bottom: 3em;
+}
