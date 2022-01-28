@@ -8,17 +8,22 @@ const { cloudinary } = require('../cloudinary');
 const { sortValues } = require('../utils/sortValues');
 
 module.exports.index = async(req, res) => {
-    const { title, location, page, sortBy } = req.query;
+    const { title, location, page, category, sortBy } = req.query;
     const sort = {};
+    let foundCategory = {};
 
     if (sortBy) {
         const pages = sortBy.split(':');
         sort[pages[0]] = pages[1] === 'desc' ? -1 : 1
     }
 
-    if (!page && (title || location)) {
+    if (category) {
+        foundCategory = await Category.findOne({ categoryName: category });
+    }
+
+    if (!page && (title || location || category)) {
         const businesses = await Business
-            .paginate({ $or: [{ title }, { location }] }, {
+            .paginate({ $or: [{ title }, { location }, { category: foundCategory._id }] }, {
                 populate: {
                     path: 'category'
                 },
@@ -28,17 +33,18 @@ module.exports.index = async(req, res) => {
                 },
                 sort
             })
-        res.render('businesses/index', { businesses, title, location, displaySort: sortValues() });
-    } else if (!page && (!title || !location)) {
+        res.render('businesses/index', { businesses, title, location, category, displaySort: sortValues() });
+    } else if (!page && (!title || !location || !category)) {
         const businesses = await Business.paginate({}, {
             populate: {
                 path: 'category'
             },
             sort
         });
-        res.render('businesses/index', { businesses, title: '', location: '', displaySort: sortValues() })
-    } else if (page && (title || location)) {
-        const businesses = await Business.paginate({ $or: [{ title }, { location }] }, {
+        res.render('businesses/index', { businesses, title: '', location: '', category: '', displaySort: sortValues() })
+    } else if (page && (title || location || category)) {
+        const foundCategory = await Category.findOne({ categoryName: category });
+        const businesses = await Business.paginate({ $or: [{ title }, { location }, { category: foundCategory._id }] }, {
             page,
             populate: {
                 path: 'category'
@@ -83,7 +89,6 @@ module.exports.createBusiness = async(req, res) => {
     category.businesses.push(business);
     await business.save();
     await category.save();
-    console.log(business);
     req.flash('success', 'Successfully Created a New Post!');
     res.redirect(`/businesses/${business._id}`);
 };

@@ -68,7 +68,7 @@
                                                 <!-- Dropdown list -->
                                                 <div class="dropdown-menu w-25">
                                                     <% for(const values of displaySort){ %>
-                                                        <a class="dropdown-item" href="/businesses?<%= title || location ? `${title && !location ? `title=${title}` : ''}${location && !title ? `location=${location}` : ''}${title && location ? `title=${title}&location=${location}` : ''}&sortBy=createdAt:${values.sortOrder}` 
+                                                        <a class="dropdown-item" href="/businesses?<%= title || location || category? `${title && !location && !category ? `title=${title}` : ''}${location && !title && !category ? `location=${location}` : ''}${category && !title && !location ? `category=${category}`:''}${title && location && category ? `title=${title}&location=${location}&category=${category}` : ''}&sortBy=createdAt:${values.sortOrder}` 
                                                     : `sortBy=createdAt:${values.sortOrder}` %>">
                                                             <%= values.anchorValue  %>
                                                         </a>
@@ -146,7 +146,7 @@
         </section>
         <% if(businesses.hasNextPage){ %>
             <div class="text-center mb-5" id="generate-data">
-                <a href="/businesses?page=<%= businesses.nextPage %><%= title ? `&title=${title}` : ''%><%= location ? `&location=${location}` : '' %><%= sortBy ? `&sortBy=${sortBy}` : ''  %>" id="paginate" class="btn btn-primary">Load More</a>
+                <a href="/businesses?page=<%= businesses.nextPage %><%= title ? `&title=${title}` : ''%><%= location ? `&location=${location}` : '' %><%= category ? `&category=${category}`:''  %><%= sortBy ? `&sortBy=${sortBy}` : ''  %>" id="paginate" class="btn btn-primary">Load More</a>
             </div>
             <% } %>
                 <script>

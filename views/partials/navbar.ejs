@@ -50,8 +50,11 @@
                             </a>
                                 <!-- Dropdown list -->
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item <%= !navbarCategory ? 'active' : ''%>" href="/businesses">
+                                        All Businesses
+                                    </a>
                                     <% for(const category of categories){ %>
-                                        <a class="dropdown-item" href="/businesses?<%= `category=${category.categoryName}` %>">
+                                        <a class="dropdown-item <%= navbarCategory && navbarCategory === category.categoryName ? 'active' : '' %>" href="/businesses?<%= `category=${category.categoryName}` %>">
                                             <%= `${category.displayText}s` %>
                                         </a>
                                         <% } %>

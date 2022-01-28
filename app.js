@@ -70,6 +70,7 @@ app.use(catchAsync(async(req, res, next) => {
 
 app.use((req, res, next) => {
     res.locals.categories = req.session.categories;
+    res.locals.navbarCategory = req.query.category;
     res.locals.sortBy = req.query.sortBy;
     res.locals.title = req.query.title;
     res.locals.location = req.query.location

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Business = require('../models/business');
+const Category = require('../models/category');
 const cities = require('./cities');
 const { businesses } = require('./seedHelpers');
 
@@ -33,7 +34,10 @@ const seedDB = async() => {
                 originalName: 'yum2.jpg'
             }]
         });
+        const category = await Category.findById(business.category);
+        category.businesses.push(business);
         await business.save();
+        await category.save();
     }
 }
 
