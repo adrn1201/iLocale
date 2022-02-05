@@ -1,11 +1,15 @@
 module.exports.sortValues = () => (
     [{
-            sortOrder: 'desc',
+            sortName: 'createdAt:desc',
             anchorValue: 'Most Recent'
         },
         {
-            sortOrder: 'asc',
+            sortName: 'createdAt:asc',
             anchorValue: 'Oldest'
-        }
+        },
+        {
+            sortName: 'mostReviewed',
+            anchorValue: 'Most Reviewed'
+        },
     ]
 )

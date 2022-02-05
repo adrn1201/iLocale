@@ -1,6 +1,7 @@
 const paginate = document.querySelector('#paginate');
 const $generateDataDiv = $('#generate-data');
 const $businessesContainer = $('#businesses-container');
+let generateDisplay = '';
 
 async function fetchData(url) {
     const response = await fetch(url);
@@ -12,6 +13,7 @@ paginate.addEventListener('click', async function(e) {
     e.preventDefault();
     let generatedData = await fetchData(this.href);
     for (const business of generatedData.docs) {
+        generateDisplay = displayStars(business)
         let template = generateBusiness(business);
         $businessesContainer.append(template);
     }
@@ -54,13 +56,7 @@ function generateBusiness(business) {
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="product-ratings float-lg-right pb-3">
-                        <ul class="list-inline">
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                        </ul>
+                        ${generateDisplay}
                     </div>
                 </div>
             </div>
@@ -69,6 +65,27 @@ function generateBusiness(business) {
 </div>`;
 
     return template;
+}
+
+function displayStars(dataBusiness) {
+    if (dataBusiness.rateCount) {
+        return `
+        <div class="stars-outer">
+            <div class="stars-inner"></div>
+        </div>
+        <span class="text-muted" style="font-size: small;">
+          ${reviewGrammar(dataBusiness)}
+        </span>`;
+    }
+    return `<p>No reviews</p>`;
+
+}
+
+function reviewGrammar(data) {
+    if (data.rateCount && data.rateCount === 1) {
+        return `${data.rateCount} review`;
+    }
+    return `${data.rateCount} reviews`;
 }
 
 function elementCondition(responseData) {

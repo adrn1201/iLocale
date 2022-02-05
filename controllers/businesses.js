@@ -12,9 +12,11 @@ module.exports.index = async(req, res) => {
     const sort = {};
     let foundCategory = {};
 
-    if (sortBy) {
+    if (sortBy && (sortBy.split(':')[0] === 'createdAt')) {
         const pages = sortBy.split(':');
         sort[pages[0]] = pages[1] === 'desc' ? -1 : 1
+    } else if (sortBy && sortBy === 'mostReviewed') {
+        sort['rateCount'] = -1
     }
 
     if (category) {

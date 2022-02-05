@@ -55,7 +55,9 @@ const businessSchema = new Schema({
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'
-    }
+    },
+    rateAvg: Number,
+    rateCount: Number
 }, opts);
 
 businessSchema.virtual('properties.popUpMarkup').get(function() {

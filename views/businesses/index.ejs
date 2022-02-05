@@ -37,13 +37,22 @@
                                         <div class="col-md-6">
                                             <div class="nav-item dropdown dropdown-slide">
                                                 <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="label-link">
-                                                Sort: <span><strong id="selected-text"><%= sortBy === 'createdAt:desc' ? 'Most Recent' : 'Oldest' %></strong></span><span id="sort-icon"><i class="fa fa-angle-down" id="set-dc"></i></span>
+                                                Sort: <span><strong id="selected-text">
+                                                    <% if(sortBy === 'createdAt:desc'){ %> 
+                                                        Most Recent
+                                                    <% } else if(sortBy === 'mostReviewed'){%> 
+                                                        Most Reviewed
+                                                    <% } else{%> 
+                                                        Oldest
+                                                        <% } %> 
+
+                                                </strong></span><span id="sort-icon"><i class="fa fa-angle-down" id="set-dc"></i></span>
                                             </a>
                                                     <!-- Dropdown list -->
                                                     <div class="dropdown-menu w-25">
                                                         <% for(const values of displaySort){ %>
-                                                            <a class="dropdown-item <%= sortBy && values.sortOrder === sortBy.split(':')[1] ? 'active' : '' %>" href="/businesses?<%= title || location || category? `${title && !location && !category ? `title=${title}` : ''}${location && !title && !category ? `location=${location}` : ''}${category && !title && !location ? `category=${category}`:''}${title && location && category ? `title=${title}&location=${location}&category=${category}` : ''}&sortBy=createdAt:${values.sortOrder}` 
-                                                    : `sortBy=createdAt:${values.sortOrder}` %>">
+                                                            <a class="dropdown-item <%= sortBy && values.sortName === sortBy ? 'active' : '' %>" href="/businesses?<%= title || location || category? `${title && !location && !category ? `title=${title}` : ''}${location && !title && !category ? `location=${location}` : ''}${category && !title && !location ? `category=${category}`:''}${title && location && category ? `title=${title}&location=${location}&category=${category}` : ''}&sortBy=${values.sortName}` 
+                                                    : `sortBy=${values.sortName}` %>">
                                                                 <%= values.anchorValue  %>
                                                             </a>
                                                             <% } %>
@@ -85,13 +94,16 @@
                                             </div>
                                             <div class="col-lg-6 align-self-center">
                                                 <div class="product-ratings float-lg-right pb-3">
-                                                    <ul class="list-inline">
-                                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    </ul>
+                                                    <% if(business.rateCount){ %>
+                                                        <div class="stars-outer">
+                                                            <div class="stars-inner"></div>
+                                                        </div>
+                                                        <span class="text-muted" style="font-size: small;">
+                                                        <%= business.rateCount && business.rateCount === 1 ? `${business.rateCount} review` : `${business.rateCount} reviews`%>
+                                                    </span>
+                                                        <% } else{ %>
+                                                            <p>No reviews</p>
+                                                            <% } %>
                                                 </div>
                                             </div>
                                         </div>
@@ -116,6 +128,7 @@
                         features: <%- JSON.stringify(businesses.docs) %>
                     };
                 </script>
+                <script src="/js/indexStars.js"></script>
                 <script src="/js/clusterMap.js"></script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
                 <script src="/js/indexPagination.js"></script>
