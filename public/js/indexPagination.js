@@ -12,11 +12,14 @@ async function fetchData(url) {
 paginate.addEventListener('click', async function(e) {
     e.preventDefault();
     let generatedData = await fetchData(this.href);
-    for (const business of generatedData.docs) {
+
+    generatedData.docs.forEach((business, index) => {
         generateDisplay = displayStars(business)
-        let template = generateBusiness(business);
+        let template = generateBusiness(business, index);
         $businessesContainer.append(template);
-    }
+    });
+
+    displayPaginateRatings(generatedData);
     let { nextPage } = generatedData;
     this.href = this.href.replace(/page=\d+/, `page=${nextPage}`);
     businesses.features.push(...generatedData.docs);
@@ -24,7 +27,7 @@ paginate.addEventListener('click', async function(e) {
     elementCondition(generatedData);
 });
 
-function generateBusiness(business) {
+function generateBusiness(business, i) {
     let template = `<div class="biz-listing-list mt-20">
     <div class="row p-lg-3 p-sm-5 p-4">
         <div class="col-lg-4 align-self-center">
@@ -55,7 +58,7 @@ function generateBusiness(business) {
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
-                    <div class="product-ratings float-lg-right pb-3">
+                    <div class="product-ratings float-lg-right pb-3" id="newBiz-${i}">
                         ${generateDisplay}
                     </div>
                 </div>
@@ -96,4 +99,14 @@ function elementCondition(responseData) {
         p.innerText = 'No more businesses to load.';
         $generateDataDiv.append(p);
     }
+}
+
+function displayPaginateRatings(business) {
+    business.docs.forEach((rating, i) => {
+        if (rating.rateAvg) {
+            const starPercentage = (rating.rateAvg / starsTotal) * 100;
+            const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+            document.querySelector(`#newBiz-${i} .stars-inner`).style.width = starPercentageRounded;
+        }
+    })
 }

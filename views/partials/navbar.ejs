@@ -22,7 +22,7 @@
                                 Businesses <span><i class="fa fa-angle-down"></i></span>
                             </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item <%= path !== '/' && !navbarCategory ? 'active' : ''%>" href="/businesses">
+                                    <a class="dropdown-item <%= (path !== '/' && !navbarCategory) && path.split('/businesses')[1] === '' ? 'active' : ''%>" href="/businesses">
                                         All Businesses
                                     </a>
                                     <% for(const category of categories){ %>
