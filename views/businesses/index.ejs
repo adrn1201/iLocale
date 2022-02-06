@@ -51,7 +51,7 @@
                                                     <!-- Dropdown list -->
                                                     <div class="dropdown-menu w-25">
                                                         <% for(const values of displaySort){ %>
-                                                            <a class="dropdown-item <%= sortBy && values.sortName === sortBy ? 'active' : '' %>" href="/businesses?<%= title || location || category? `${title && !location && !category ? `title=${title}` : ''}${location && !title && !category ? `location=${location}` : ''}${category && !title && !location ? `category=${category}`:''}${title && location && category ? `title=${title}&location=${location}&category=${category}` : ''}&sortBy=${values.sortName}` 
+                                                            <a class="dropdown-item <%= sortBy && values.sortName === sortBy ? 'active' : '' %>" href="/businesses?<%= title || location || category? `${title && !location && !category ? `title=${title}` : ''}${location && !title && !category ? `location=${location}` : ''}${category && !title && !location ? `category=${category}`:''}${title && location && !category ? `title=${title}&location=${location}` : ''}${title && location && category ? `title=${title}&location=${location}&category=${category}` : ''}&sortBy=${values.sortName}` 
                                                     : `sortBy=${values.sortName}` %>">
                                                                 <%= values.anchorValue  %>
                                                             </a>
