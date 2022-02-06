@@ -13,11 +13,11 @@ paginate.addEventListener('click', async function(e) {
     e.preventDefault();
     let generatedData = await fetchData(this.href);
 
-    generatedData.docs.forEach((business, index) => {
+    for (const business of generatedData.docs) {
         generateDisplay = displayStars(business)
-        let template = generateBusiness(business, index);
+        let template = generateBusiness(business);
         $businessesContainer.append(template);
-    });
+    }
 
     displayPaginateRatings(generatedData);
     let { nextPage } = generatedData;
@@ -27,7 +27,7 @@ paginate.addEventListener('click', async function(e) {
     elementCondition(generatedData);
 });
 
-function generateBusiness(business, i) {
+function generateBusiness(business) {
     let template = `<div class="biz-listing-list mt-20">
     <div class="row p-lg-3 p-sm-5 p-4">
         <div class="col-lg-4 align-self-center">
@@ -58,7 +58,7 @@ function generateBusiness(business, i) {
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
-                    <div class="product-ratings float-lg-right pb-3" id="newBiz-${i}">
+                    <div class="product-ratings float-lg-right pb-3" id="biz-${business._id}">
                         ${generateDisplay}
                     </div>
                 </div>
@@ -102,11 +102,11 @@ function elementCondition(responseData) {
 }
 
 function displayPaginateRatings(business) {
-    business.docs.forEach((rating, i) => {
+    business.docs.forEach((rating) => {
         if (rating.rateAvg) {
             const starPercentage = (rating.rateAvg / starsTotal) * 100;
             const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-            document.querySelector(`#newBiz-${i} .stars-inner`).style.width = starPercentageRounded;
+            document.querySelector(`#biz-${rating._id} .stars-inner`).style.width = starPercentageRounded;
         }
     })
 }
