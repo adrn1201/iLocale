@@ -10,11 +10,13 @@ const methodOverride = require('method-override');
 const Category = require('./models/category');
 const { home } = require('./controllers/home')
 const userRoutes = require('./routes/users');
+const contactRoute = require('./routes/contact');
 const adminRoutes = require('./routes/categories');
 const businessRoutes = require('./routes/businesses');
 const reviewRoutes = require('./routes/reviews');
 const AppError = require('./utils/AppError');
 const catchAsync = require('./utils/catchAsync');
+const expressSanitizer = require('express-sanitizer');
 const session = require('express-session');
 const flash = require('connect-flash');
 const User = require('./models/user');
@@ -56,6 +58,7 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(expressSanitizer());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -84,6 +87,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', userRoutes);
+app.use('/contact', contactRoute);
 app.use('/admin/categories', adminRoutes);
 app.use('/businesses', businessRoutes);
 app.use('/businesses/:id/reviews', reviewRoutes);
