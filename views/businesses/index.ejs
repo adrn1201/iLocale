@@ -81,7 +81,7 @@
                                                     </div>
                                                     <ul class="list-inline mt-2 mb-3">
                                                         <li class="list-inline-item">
-                                                            <a href="category.html"> <i class="fa fa-<%=business.category.iconClass%>"></i>
+                                                            <a href="/businesses?category=<%= business.category.categoryName %>"> <i class="fa fa-<%=business.category.iconClass%>"></i>
                                                                         <%= business.category ? business.category.displayText : 'N/A' %>
                                                                     </a>
                                                         </li>

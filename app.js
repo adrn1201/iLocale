@@ -8,6 +8,7 @@ const ejsMate = require('ejs-mate');
 const path = require('path');
 const methodOverride = require('method-override');
 const Category = require('./models/category');
+const { home } = require('./controllers/home')
 const userRoutes = require('./routes/users');
 const adminRoutes = require('./routes/categories');
 const businessRoutes = require('./routes/businesses');
@@ -87,9 +88,7 @@ app.use('/admin/categories', adminRoutes);
 app.use('/businesses', businessRoutes);
 app.use('/businesses/:id/reviews', reviewRoutes);
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
+app.get('/', catchAsync(home));
 
 app.all('*', (req, res, next) => {
     return next(new AppError('Page Not Found', 404));

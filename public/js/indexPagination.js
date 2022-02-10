@@ -102,11 +102,11 @@ function elementCondition(responseData) {
 }
 
 function displayPaginateRatings(business) {
-    business.docs.forEach((rating) => {
+    for (const rating of business.docs) {
         if (rating.rateAvg) {
             const starPercentage = (rating.rateAvg / starsTotal) * 100;
             const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
             document.querySelector(`#biz-${rating._id} .stars-inner`).style.width = starPercentageRounded;
         }
-    })
+    }
 }
