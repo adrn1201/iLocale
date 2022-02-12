@@ -5,9 +5,15 @@ const { validatePassword } = require('../middleware/password');
 const catchAsync = require('../utils/catchAsync');
 const users = require('../controllers/users');
 
-router.route('/register')
-    .get(users.renderRegister)
-    .post(validatePassword, catchAsync(users.register));
+router.get('/auth/google', passport.authenticate('google', {
+    scope: ['email', 'profile']
+}));
+
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login', failureFlash: true }), users.login);
+
+router.route('/signup')
+    .get(users.renderSignUp)
+    .post(validatePassword, catchAsync(users.signUp));
 
 router.route('/login')
     .get(users.renderLogin)

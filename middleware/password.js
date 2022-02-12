@@ -16,7 +16,7 @@ module.exports.validatePassword = (req, res, next) => {
     if (error) {
         const msgs = error.details.map(el => el.message);
         req.flash('passwordError', msgs);
-        res.redirect('/register');
+        res.redirect('/signup');
     } else {
         next();
     }

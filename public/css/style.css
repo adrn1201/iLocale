@@ -2823,13 +2823,8 @@ form textarea {
     color: white;
 }
 
-#alternate-text {
-    margin-left: 12em;
-    font-size: medium;
-}
-
-#register-link {
-    margin-left: 9.5em;
+#register-button {
+    margin-left: 11em;
 }
 
 .input-checkbox {
@@ -2973,4 +2968,83 @@ form textarea {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #f8ce0b;
+}
+
+.btn-google {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    width: 100%;
+    height: 45px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -ms-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-google {
+    color: #555555;
+    background-color: #fff;
+}
+
+.btn-google img {
+    margin-right: 15px;
+}
+
+.btn-google:hover:before {
+    opacity: 1;
+}
+
+.btn-google:hover {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.hr-text {
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: black;
+    text-align: center;
+    height: 1.5em;
+    opacity: .5;
+}
+
+.hr-text::before {
+    content: '';
+    background: linear-gradient(to right, transparent, #333333, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+}
+
+.hr-text::after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+    padding: 0 .5em;
+    line-height: 1.5em;
+    color: #333333;
+    background-color: #fcfcfa;
 }

@@ -16,7 +16,7 @@ const seedDB = async() => {
     for (let i = 0; i < 60; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         const business = new Business({
-            author: '61e10fa6e4983cd57cd5be92', //61e4e0366a75a5fdf7c221e5, 61e10fa6e4983cd57cd5be92
+            author: '6207ca48c5c912773f11e494',
             location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
             geometry: {
                 type: 'Point',

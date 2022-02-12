@@ -22,7 +22,7 @@ const flash = require('connect-flash');
 const User = require('./models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
 
@@ -63,6 +63,28 @@ app.use(expressSanitizer());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+
+passport.use(new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "http://localhost:3000/google/callback",
+        passReqToCallback: true
+    },
+    async function(request, accessToken, refreshToken, profile, done) {
+        const foundUser = await User.findOne({ googleId: profile.id })
+        if (foundUser) {
+            done(null, foundUser);
+        } else {
+            const newUser = new User({
+                email: profile.email,
+                googleId: profile.id,
+                username: profile.displayName
+            });
+            await newUser.save();
+            done(null, newUser);
+        }
+    }
+));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

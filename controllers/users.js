@@ -1,10 +1,10 @@
 const User = require('../models/user');
 
-module.exports.renderRegister = (req, res) => {
-    res.render('auth/register');
+module.exports.renderSignUp = (req, res) => {
+    res.render('auth/signup');
 };
 
-module.exports.register = async(req, res, next) => {
+module.exports.signUp = async(req, res, next) => {
     try {
         const { username, email, password } = req.body;
         const user = new User({ username, email });
@@ -16,7 +16,7 @@ module.exports.register = async(req, res, next) => {
         });
     } catch (e) {
         req.flash('error', e.message);
-        res.redirect('/register');
+        res.redirect('/signup');
     }
 };
 

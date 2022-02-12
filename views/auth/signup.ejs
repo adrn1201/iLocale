@@ -4,9 +4,13 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-8 align-item-center">
-                    <div class="border border">
-                        <h3 class="bg-gray p-4">Register</h3>
-                        <form action="/register" method="POST" class="needs-validation" novalidate>
+                    <div class="border">
+                        <h3 class="mt-4 text-center font-weight-bold">Sign Up</h3>
+                        <div class="p-4">
+                            <a href="/auth/google" class="btn-google"> <img src="/images/google-logo.png" alt="GOOGLE">Continue with Google </a>
+                        </div>
+                        <hr class="hr-text" data-content="OR">
+                        <form action="/signup" method="POST" class="needs-validation" novalidate>
                             <fieldset class="p-4">
                                 <input type="text" name="username" placeholder="Username*" class="form-control mt-3 p-3 w-100 my-2" required autofocus>
                                 <div class="invalid-feedback error-text">Username is required</div>
@@ -21,7 +25,8 @@
                                         <% }%>
                                 </ul>
                                 <div class="invalid-feedback error-text">Password is required</div>
-                                <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold offset-4 mt-3">Register</button>
+                                <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold mt-3" id="register-button">Sign up</button>
+                                <p class="mt-4 text-muted text-center" id="alternate-text">Have an account? <a class="text-primary" href="/login" id="register-link">Log in</a></p>
                             </fieldset>
                         </form>
                     </div>

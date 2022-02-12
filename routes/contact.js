@@ -5,7 +5,7 @@ const { isLoggedIn } = require('../middleware')
 const contact = require('../controllers/contact');
 
 router.route('/')
-    .get(isLoggedIn, contact.renderContact)
-    .post(isLoggedIn, catchAsync(contact.sendEmail));
+    .get(contact.renderContact)
+    .post(catchAsync(contact.sendEmail));
 
 module.exports = router;

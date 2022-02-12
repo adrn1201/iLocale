@@ -7,7 +7,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true
+    },
+    googleId: String,
+    username: {
+        type: String,
+        required: true,
+        unique: true
     }
+
 }, { timestamps: true });
 
 userSchema.plugin(passportLocalMongoose);
