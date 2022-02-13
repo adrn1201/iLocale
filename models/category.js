@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Business = require('./business');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const categorySchema = new Schema({
     categoryName: {
@@ -40,5 +41,7 @@ categorySchema.post('findOneAndDelete', async(doc) => {
         await Business.deleteMany({ _id: { $in: doc.businesses } })
     }
 });
+
+categorySchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Category', categorySchema);

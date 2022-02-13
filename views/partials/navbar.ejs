@@ -29,9 +29,30 @@
                                         <% } %>
                                 </div>
                             </li>
-                            <li class="nav-item <%= path === '/contact' ? 'active' : '' %>">
-                                <a class="nav-link" href="/contact ">Contact</a>
-                            </li>
+                            <% if(currentUser && currentUser.isAdmin){ %>
+                                <li class="nav-item dropdown dropdown-slide ">
+                                    <a class="nav-link dropdown-toggle " href=" " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false ">
+                                Manage <span><i class="fa fa-angle-down "></i></span>
+                            </a>
+                                    <div class="dropdown-menu ">
+                                        <a href="/admin/categories" class="dropdown-item">
+                                        Categories
+                                   </a>
+                                        <a href="/admin/categories/new" class="dropdown-item">
+                                        Create Category
+                                    </a>
+                                        <a href="/admin/posts" class="dropdown-item">
+                                        Manage Posts
+                                    </a>
+                                        <a href="/admin/posts" class="dropdown-item">
+                                        Manage User Roles
+                                    </a>
+                                    </div>
+                                </li>
+                                <% } %>
+                                    <li class="nav-item <%= path === '/contact' ? 'active' : '' %>">
+                                        <a class="nav-link" href="/contact ">Contact</a>
+                                    </li>
                         </ul>
                         <ul class="navbar-nav ml-auto mt-10">
                             <% if(!currentUser){ %>

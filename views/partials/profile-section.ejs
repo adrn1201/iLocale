@@ -3,6 +3,9 @@
     <div class="profile-thumb">
         <img src="/images/user/user-thumb.jpg" alt="" class="rounded-circle">
     </div>
-    <!-- User Name -->
-    <h5 class="text-center">Samanta Doe</h5>
+    <% if(currentUser && currentUser.isAdmin){ %>
+        <h5 class="text-center">
+            <%= currentUser.username %>
+        </h5>
+        <% } %>
 </div>

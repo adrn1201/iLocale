@@ -80,6 +80,9 @@ passport.use(new GoogleStrategy({
                 googleId: profile.id,
                 username: profile.displayName
             });
+            if (newUser.email === process.env.ADMINISTRATIVE_EMAIL) {
+                newUser.isAdmin = true;
+            }
             await newUser.save();
             done(null, newUser);
         }

@@ -26,7 +26,7 @@ module.exports.validateBusiness = (req, res, next) => {
 module.exports.isAuthor = async(req, res, next) => {
     const { id } = req.params
     const business = await Business.findById(id);
-    if (!business.author.equals(req.user._id)) {
+    if (!business.author.equals(req.user._id) || !req.user.isAdmin) {
         req.flash('error', 'You Do not Have Permission to Do That!');
         return res.redirect(`/businesses/${business._id}`);
     }
@@ -46,7 +46,7 @@ module.exports.validateReview = (req, res, next) => {
 module.exports.isReviewAuthor = async(req, res, next) => {
     const { id, reviewId } = req.params
     const review = await Review.findById(reviewId);
-    if (!review.author.equals(req.user._id)) {
+    if (!review.author.equals(req.user._id) || !req.user.isAdmin) {
         req.flash('error', 'You Do not Have Permission to Do That!');
         return res.redirect(`/businesses/${id}`);
     }

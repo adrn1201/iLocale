@@ -12,7 +12,7 @@ module.exports.sendEmail = async(req, res) => {
     message = req.sanitize(message);
 
     const msg = {
-        to: process.env.MY_EMAIL,
+        to: process.env.ADMINISTRATIVE_EMAIL,
         from: email, // Use the email address or domain you verified above
         subject: `iLocale Contact Form Submission from ${name}`,
         text: message,
