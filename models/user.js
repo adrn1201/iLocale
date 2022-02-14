@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const passportLocalMongoose = require('passport-local-mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const userSchema = new Schema({
     email: {
@@ -14,6 +15,10 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    isSuperUser: {
+        type: Boolean,
+        default: false
+    },
     isAdmin: {
         type: Boolean,
         default: false
@@ -22,5 +27,5 @@ const userSchema = new Schema({
 }, { timestamps: true });
 
 userSchema.plugin(passportLocalMongoose);
-
+userSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('User', userSchema);

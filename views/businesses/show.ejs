@@ -104,7 +104,7 @@
                                                                                 <%= review.rating %> stars
                                                                             </p>
                                                                         </div>
-                                                                        <% if(currentUser && review.author.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                                                                        <% if(currentUser && review.author.equals(currentUser._id) || (currentUser && (currentUser.isAdmin && !review.author.isSuperUser)) || currentUser && currentUser.isSuperUser){ %>
                                                                             <div class="col-1 dropleft" id="review-options">
                                                                                 <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                 </a>
@@ -154,7 +154,7 @@
                     <div class="col-md-4" id="show-sidebar">
                         <div class="sidebar sticky-top">
                             <div id='map'></div>
-                            <% if(currentUser && business.author.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                            <% if(currentUser && business.author.equals(currentUser._id) || (currentUser && (currentUser.isAdmin && !business.author.isSuperUser)) || currentUser && currentUser.isSuperUser){ %>
                                 <div class="widget user text-center mt-4" id="post-controls">
                                     <ul class="list-inline mt-20">
                                         <li class="list-inline-item"><a href="/businesses/<%= business._id%>/edit" class="btn btn-contact d-inline-block  btn-info px-lg-3 my-1 px-md-3">Edit Post</a></li>
@@ -178,6 +178,7 @@
             const business = <%- JSON.stringify(business) %>;
             const currentUserId = <%- JSON.stringify(currentUser) ? JSON.stringify(currentUser._id) :  false %>;
             const currentUserIsAdmin = <%- JSON.stringify(currentUser) ? JSON.stringify(currentUser.isAdmin) :  false %>;
+            const currentUserIsSuperUser = <%- JSON.stringify(currentUser) ? JSON.stringify(currentUser.isSuperUser) :  false %>;
         </script>
 
         <script src="/js/showPageMap.js"></script>

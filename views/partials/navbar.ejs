@@ -29,24 +29,23 @@
                                         <% } %>
                                 </div>
                             </li>
-                            <% if(currentUser && currentUser.isAdmin){ %>
+                            <% if(currentUser && currentUser.isAdmin || (currentUser && currentUser.isSuperUser)){ %>
                                 <li class="nav-item dropdown dropdown-slide ">
                                     <a class="nav-link dropdown-toggle " href=" " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false ">
                                 Manage <span><i class="fa fa-angle-down "></i></span>
                             </a>
                                     <div class="dropdown-menu ">
-                                        <a href="/admin/categories" class="dropdown-item">
-                                        Categories
-                                   </a>
-                                        <a href="/admin/categories/new" class="dropdown-item">
-                                        Create Category
-                                    </a>
-                                        <a href="/admin/posts" class="dropdown-item">
-                                        Manage Posts
-                                    </a>
-                                        <a href="/admin/posts" class="dropdown-item">
-                                        Manage User Roles
-                                    </a>
+                                        <% if(currentUser && currentUser.isSuperUser){ %>
+                                            <a href="/superuser/users" class="dropdown-item">
+                                                <i class="fa fa-user"></i> Manage User Roles
+                                            </a>
+                                            <% } %>
+                                                <a href="/admin/categories" class="dropdown-item">
+                                                    <i class="fa fa-folder"></i> Categories
+                                                </a>
+                                                <a href="/admin/categories/new" class="dropdown-item">
+                                                    <i class="fa fa-plus-circle"></i> Create Category
+                                                </a>
                                     </div>
                                 </li>
                                 <% } %>

@@ -1,0 +1,65 @@
+<% layout('layouts/boilerplate') %>
+    <section class="dashboard section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+                    <div class="sidebar">
+                        <!-- User Widget -->
+                        <%- include('../partials/profile-section') %>
+                            <!-- Dashboard Links -->
+                            <%- include('../partials/admin-sidebar') %>
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+                    <!-- Recently Favorited -->
+                    <div class="widget dashboard-container my-adslist">
+                        <h3 class="widget-header">Update
+                            <%= foundUser.username %> role</h3>
+                        <table class="table table-responsive product-dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Username</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">isAdmin</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categories-container">
+                                <tr>
+                                    <td class="product-category"><span class="categories"><%= foundUser.username %></span></td>
+                                    <td class="product-category"><span class="categories"><%= foundUser.email %></span></td>
+                                    <td class="product-category"><span class="categories"><%= foundUser.isAdmin %></span></td>
+                                    <td class="action" data-title="Action">
+                                        <div class="">
+                                            <ul class="list-inline justify-content-center">
+                                                <li class="list-inline-item">
+                                                    <form action="/superuser/users/<%= foundUser._id %>?_method=PUT" method="POST">
+                                                        <div class="form-check mr-4">
+                                                            <input class="form-check-input" type="radio" name="user[isAdmin]" value="true" id="make-admin-radio" <%=foundUser.isAdmin ? 'checked' : '' %>>
+                                                            <label class="form-check-label" for="make-admin-radio">
+                                                              Admin
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check ml-3">
+                                                            <input class="form-check-input" type="radio" name="user[isAdmin]" value="false" id="make-regular-radio" <%=foundUser.isAdmin ? '' : 'checked' %>>
+                                                            <label class="form-check-label" for="make-regular-radio">
+                                                                Regular User
+                                                            </label>
+                                                        </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-transparent offset-5">Save Changes</button>
+                    </form>
+
+                </div>
+            </div>
+            <!-- Row End -->
+        </div>
+        <!-- Container End -->
+    </section>

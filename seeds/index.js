@@ -16,7 +16,7 @@ const seedDB = async() => {
     for (let i = 0; i < 60; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         const business = new Business({
-            author: '6208f0f3876edba768acdc2e',
+            author: '6209f782a7b2bc18c29a4c25',
             location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
             geometry: {
                 type: 'Point',
@@ -25,7 +25,7 @@ const seedDB = async() => {
                     cities[rand1000].latitude
                 ]
             },
-            category: '6208f17353f74f45c16e06ad', //61e7d86ad931da6487316924, 61e7ae87ccc1bbbb0a25b726
+            category: '6209f78ca7b2bc18c29a4c33', //61e7d86ad931da6487316924, 61e7ae87ccc1bbbb0a25b726
             title: `${sample(businesses)}`,
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, unde cupiditate! Aliquid quidem nostrum enim molestias nulla eius consequatur consectetur eligendi pariatur. Fuga atque error explicabo obcaecati, debitis quaerat doloremque.',
             images: [{

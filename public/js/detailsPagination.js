@@ -46,7 +46,7 @@ function generateTemplate(review) {
 }
 
 function generateOptions(review) {
-    if (currentUserId && review.author._id === currentUserId || currentUserId && currentUserIsAdmin) {
+    if (currentUserId && review.author._id === currentUserId || (currentUserId && (currentUserIsAdmin && !review.author.isSuperUser)) || currentUserId && currentUserIsSuperUser) {
         return `<div class="col-1 dropleft">
                 <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 </a>

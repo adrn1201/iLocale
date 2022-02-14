@@ -1,11 +1,15 @@
 <div class="widget user-dashboard-profile">
     <!-- User Image -->
     <div class="profile-thumb">
-        <img src="/images/user/user-thumb.jpg" alt="" class="rounded-circle">
+        <img src="/images/admin-photo.jpg" alt="" class="rounded-circle">
     </div>
     <% if(currentUser && currentUser.isAdmin){ %>
-        <h5 class="text-center">
+        <h5 class="text-center mt-1">
             <%= currentUser.username %>
         </h5>
+        <p class="text-center mt-1">
+            <%= currentUser && (currentUser.isAdmin && currentUser.isSuperUser) ? 'Superuser' : '' %>
+                <%= currentUser && (currentUser.isAdmin && !currentUser.isSuperUser) ? 'Admin' : '' %>
+        </p>
         <% } %>
 </div>

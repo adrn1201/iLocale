@@ -16,3 +16,18 @@ module.exports.reviewSchema = Joi.object({
         rating: Joi.number().min(1).max(5)
     }).required()
 });
+
+module.exports.contactSchema = Joi.object({
+    contact: Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string()
+            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+        message: Joi.string().required()
+    }).required()
+});
+
+module.exports.categorySchema = Joi.object({
+    category: Joi.object({
+        categoryName: Joi.string().required(),
+    }).required()
+});

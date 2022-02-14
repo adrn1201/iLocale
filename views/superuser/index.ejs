@@ -1,0 +1,74 @@
+<% layout('layouts/boilerplate') %>
+    <section class="dashboard section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+                    <div class="sidebar">
+                        <!-- User Widget -->
+                        <%- include('../partials/profile-section') %>
+                            <!-- Dashboard Links -->
+                            <%- include('../partials/admin-sidebar') %>
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+                    <!-- Recently Favorited -->
+                    <div class="widget dashboard-container my-adslist">
+                        <h3 class="widget-header">Users</h3>
+                        <% if(allUsers.docs.length){ %>
+                            <table class="table table-responsive product-dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Username</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">isAdmin</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-container">
+                                    <% for(const user of allUsers.docs){ %>
+                                        <tr>
+                                            <td class="product-category"><span class="categories"><%= user.username %></span></td>
+                                            <td class="product-category"><span class="categories"><%= user.email %></span></td>
+                                            <td class="product-category"><span class="categories"><%= user.isAdmin %></span></td>
+                                            <td class="action" data-title="Action">
+                                                <div class="">
+                                                    <ul class="list-inline justify-content-center">
+                                                        <li class="list-inline-item">
+                                                            <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit Role" href="/superuser/users/<%= user._id %>/edit">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <form action="/superuser/users/<%= user._id %>?_method=DELETE" method="POST">
+                                                                <button class="delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                            <% } else{ %>
+                                <p class="text-center">No users available.</p>
+                                <% } %>
+                    </div>
+                    <% if(allUsers.hasNextPage){ %>
+                        <div class="text-center" id="user-feedback">
+                            <a href="/superuser/users?page=<%= allUsers.nextPage %>" class="text-primary" id="user-paginate">Load More</a>
+                        </div>
+                        <% } %>
+
+                </div>
+            </div>
+            <!-- Row End -->
+        </div>
+        <!-- Container End -->
+    </section>
+
+    <script>
+        const users = <%- JSON.stringify(allUsers) %>
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/superuserPagination.js"></script>

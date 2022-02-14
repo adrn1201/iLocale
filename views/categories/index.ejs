@@ -31,7 +31,7 @@
                                                 <div class="">
                                                     <ul class="list-inline justify-content-center">
                                                         <li class="list-inline-item">
-                                                            <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="category.html">
+                                                            <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="/businesses?category=<%=category.categoryName%>">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
                                                         </li>
@@ -70,7 +70,7 @@
     </section>
 
     <script>
-        const categories = <%- JSON.stringify(categories) %>
+        const categories = <%- JSON.stringify(allCategories) %>
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/js/categoriesPagination.js"></script>

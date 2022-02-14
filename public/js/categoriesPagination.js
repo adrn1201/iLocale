@@ -44,21 +44,6 @@ function generateTemplate(category) {
 </tr>`
 }
 
-// function generateOptions(review) {
-//     if (currentUserId && review.author._id === currentUserId || currentUserId && currentUserIsAdmin) {
-//         return `<div class="col-1 dropleft">
-//                 <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-//                 </a>
-//                 <div class="dropdown-menu" id="review-options">
-//                     <form action="/businesses/${business._id }/reviews/${review._id }?_method=DELETE" method="POST">
-//                         <button class="dropdown-item" id="option-delete">Delete</button>
-//                     </form>
-//                 </div>
-//             </div>`
-//     }
-//     return '';
-// }
-
 function elementCondition(responseData) {
     if (!responseData.hasNextPage) {
         categoryPaginate.style.display = 'none';

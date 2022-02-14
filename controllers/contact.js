@@ -6,7 +6,7 @@ module.exports.renderContact = (req, res) => {
 };
 
 module.exports.sendEmail = async(req, res) => {
-    let { name, email, message } = req.body;
+    let { name, email, message } = req.body.contact;
     name = req.sanitize(name);
     email = req.sanitize(email);
     message = req.sanitize(message);

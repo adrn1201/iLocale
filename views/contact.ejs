@@ -26,19 +26,22 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form action="/contact" method="POST">
+                    <form action="/contact" method="POST" class="needs-validation" novalidate>
                         <fieldset class="p-4">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-6 pt-2">
-                                        <input type="text" name="name" placeholder="Name" class="form-control" required>
+                                        <input type="text" name="contact[name]" placeholder="Name" class="form-control" required>
+                                        <div class="invalid-feedback error-text">Name is required</div>
                                     </div>
                                     <div class="col-lg-6 pt-2">
-                                        <input type="email" name="email" placeholder="Email" class="form-control" required>
+                                        <input type="email" name="contact[email]" placeholder="Email" class="form-control" required>
+                                        <div class="invalid-feedback error-text">Email is required</div>
                                     </div>
                                 </div>
                             </div>
-                            <textarea name="message" id="contact-message" placeholder="Message" class="border w-100 p-3" required></textarea>
+                            <textarea name="contact[message]" id="contact-message" rows="10" placeholder="Message" class="form-control w-100 p-3" required></textarea>
+                            <div class="invalid-feedback error-text">Message is required</div>
                             <div class="btn-grounp">
                                 <button type="submit" class="btn btn-success mt-2 float-right">Submit</button>
                             </div>

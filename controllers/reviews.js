@@ -24,7 +24,9 @@ module.exports.createReview = async(req, res) => {
 module.exports.deleteReview = async(req, res) => {
     const { id, reviewId } = req.params;
     await Business.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    const business = await Business.findById(id);
     await Review.findByIdAndDelete(reviewId);
+    await Business.findByIdAndUpdate(business._id, { rateCount: business.reviews.length });
     req.flash('success', 'Successfully Deleted Review!');
     res.redirect(`/businesses/${id}`);
 }

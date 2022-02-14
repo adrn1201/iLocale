@@ -4,7 +4,7 @@ module.exports.index = async(req, res) => {
     const { page } = req.query;
     if (!page) {
         const allCategories = await Category.paginate({});
-        res.render('admin/index', { allCategories });
+        res.render('categories/index', { allCategories });
     } else {
         const allCategories = await Category.paginate({}, { page });
         res.status(200).json(allCategories);
@@ -12,7 +12,7 @@ module.exports.index = async(req, res) => {
 }
 
 module.exports.renderNewForm = (req, res) => {
-    res.render('admin/new');
+    res.render('categories/new');
 }
 
 module.exports.createCategory = async(req, res) => {
@@ -26,7 +26,7 @@ module.exports.createCategory = async(req, res) => {
 module.exports.renderEditForm = async(req, res) => {
     const { id } = req.params;
     const category = await Category.findById(id);
-    res.render('admin/edit', { category });
+    res.render('categories/edit', { category });
 }
 
 module.exports.updateCategory = async(req, res) => {

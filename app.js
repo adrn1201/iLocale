@@ -11,7 +11,8 @@ const Category = require('./models/category');
 const { home } = require('./controllers/home')
 const userRoutes = require('./routes/users');
 const contactRoute = require('./routes/contact');
-const adminRoutes = require('./routes/categories');
+const categoryRoute = require('./routes/categories');
+const manageUserRoute = require('./routes/superuser');
 const businessRoutes = require('./routes/businesses');
 const reviewRoutes = require('./routes/reviews');
 const AppError = require('./utils/AppError');
@@ -80,7 +81,8 @@ passport.use(new GoogleStrategy({
                 googleId: profile.id,
                 username: profile.displayName
             });
-            if (newUser.email === process.env.ADMINISTRATIVE_EMAIL) {
+            if (newUser.email === process.env.SUPERUSER_EMAIL) {
+                newUser.isSuperUser = true;
                 newUser.isAdmin = true;
             }
             await newUser.save();
@@ -113,7 +115,8 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes);
 app.use('/contact', contactRoute);
-app.use('/admin/categories', adminRoutes);
+app.use('/admin/categories', categoryRoute);
+app.use('/superuser/users', manageUserRoute);
 app.use('/businesses', businessRoutes);
 app.use('/businesses/:id/reviews', reviewRoutes);
 

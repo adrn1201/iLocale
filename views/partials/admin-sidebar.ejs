@@ -1,6 +1,9 @@
 <div class="widget user-dashboard-menu">
     <ul>
-        <li class="<%= path && path === '/admin/categories' ? 'active ' : ' ' %>"><a href="/admin/categories"><i class="fa fa-user"></i>Categories</a></li>
-        <li class="<%=path && path==='/admin/categories/new' ? 'active ' : ' ' %>"><a href="/admin/categories/new"><i class="fa fa-bookmark-o"></i>Create Categories<span>5</span></a></li>
+        <% if(currentUser && currentUser.isSuperUser){ %>
+            <li class="<%=path && path==='/superuser/users' ? 'active ' : ' ' %>"><a href="/superuser/users"><i class="fa fa-user"></i>Manage Users</a></li>
+            <% } %>
+                <li class="<%= path && path === '/admin/categories' ? 'active ' : ' ' %>"><a href="/admin/categories"><i class="fa fa-folder"></i>Categories</a></li>
+                <li class="<%=path && path==='/admin/categories/new' ? 'active ' : ' ' %>"><a href="/admin/categories/new"><i class="fa fa-plus-circle"></i>Create Categories</a></li>
     </ul>
 </div>

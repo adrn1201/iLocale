@@ -8,7 +8,8 @@ module.exports.signUp = async(req, res, next) => {
     try {
         const { username, email, password } = req.body;
         const user = new User({ username, email });
-        if (email === process.env.ADMINISTRATIVE_EMAIL) {
+        if (email === process.env.SUPERUSER_EMAIL) {
+            user.isSuperUser = true;
             user.isAdmin = true;
         }
         const registeredUser = await User.register(user, password);
