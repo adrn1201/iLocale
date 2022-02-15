@@ -54,7 +54,6 @@ module.exports.isReviewAuthor = async(req, res, next) => {
         req.flash('error', 'You Do not Have Permission to Do That!');
         return res.redirect(`/businesses/${id}`);
     }
-
 }
 
 module.exports.isAdministrative = async(req, res, next) => {

@@ -94,7 +94,7 @@
                                                 <% } %>
                                                     <h3 class="tab-title <%= !currentUser ? '' : 'mt-5' %>">Reviews</h3>
                                                     <% if(reviews.docs.length){ %>
-                                                        <% for(const review of reviews.docs){ %>
+                                                        <% reviews.docs.forEach((review, i) => { %>
                                                             <div class="media">
                                                                 <div class="media-body">
                                                                     <div class="row">
@@ -109,9 +109,51 @@
                                                                                 <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                 </a>
                                                                                 <div class="dropdown-menu" id="review-options">
+                                                                                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editReviewModal<%=i%>" data-whatever="@mdo">Edit</button>
                                                                                     <form action="/businesses/<%= business._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
                                                                                         <button class="dropdown-item" id="option-delete">Delete</button>
                                                                                     </form>
+                                                                                </div>
+                                                                                <div class="modal fade" id="editReviewModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="editReviewModalLabel<%=i%>" aria-hidden="true">
+                                                                                    <div class="modal-dialog" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title" id="editReviewModalLabel<%=i%>">Edit Review -
+                                                                                                    <%= review.author.username %>
+                                                                                                </h5>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                          </button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+                                                                                                <form action="/businesses/<%= business._id %>/reviews/<%= review._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+                                                                                                    Rating:
+                                                                                                    <fieldset class="starability-basic">
+                                                                                                        <input type="radio" id="no-rate-<%= review._id%>" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                                                                                                        <input type="radio" id="edit-<%= review._id %>1" name="review[rating]" value="1" <%=review.rating===1 ? 'checked' : '' %> />
+                                                                                                        <label for="edit-<%= review._id %>1" title="Terrible">1 star</label>
+                                                                                                        <input type="radio" id="edit-<%= review._id %>2" name="review[rating]" value="2" <%=review.rating===2 ? 'checked' : '' %> />
+                                                                                                        <label for="edit-<%= review._id %>2" title="Not good">2 stars</label>
+                                                                                                        <input type="radio" id="edit-<%= review._id %>3" name="review[rating]" value="3" <%=review.rating===3 ? 'checked' : '' %> />
+                                                                                                        <label for="edit-<%= review._id %>3" title="Average">3 stars</label>
+                                                                                                        <input type="radio" id="edit-<%= review._id %>4" name="review[rating]" value="4" <%=review.rating===4 ? 'checked' : '' %> />
+                                                                                                        <label for="edit-<%= review._id %>4" title="Very good">4 stars</label>
+                                                                                                        <input type="radio" id="edit-<%= review._id %>5" name="review[rating]" value="5" <%=review.rating===5 ? 'checked' : '' %> />
+                                                                                                        <label for="edit-<%= review._id %>5" title="Amazing">5 stars</label>
+                                                                                                    </fieldset>
+                                                                                                    <div class="form-group">
+                                                                                                        <label for="message-text-<%=i%>" class="col-form-label">Message:</label>
+                                                                                                        <textarea class="form-control" name="review[body]" id="message-text-<%=i%>" required><%= review.body %></textarea>
+                                                                                                        <div class="invalid-feedback error-text">Message is required</div>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                                                <button type="submit" class="btn btn-success">Save Changes</button>
+                                                                                            </div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <% } %>
@@ -131,7 +173,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <% } %>
+                                                            <% }) %>
                                                                 <% } else{ %>
                                                                     <div class="review-comment text-center">
                                                                         <p>
