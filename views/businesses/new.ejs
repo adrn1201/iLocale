@@ -2,7 +2,7 @@
 
     <section class="record-area bg-gray py-5">
         <div class="container">
-            <form action="/businesses" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+            <form action="/businesses" method="POST" class="needs-validation" id="create-business" novalidate enctype="multipart/form-data">
                 <fieldset class="border border-gary p-4 mb-5">
                     <div class="row">
                         <div class="col-lg-12">
@@ -21,21 +21,21 @@
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Select Category:</h6>
-                            <select name="business[category]" class="form-select bg-white pt-1 w-100" required>
-                                <option selected disabled>Select Category</option>
+                            <select name="business[category]" class="custom-select slc-cat w-100" required>
+                                <option selected disabled value="">Select Category</option>
                                 <% for(const category of categories){ %> 
                                     <option value="<%=category._id%>"><%= category.displayText %></option>
                                 <% } %> 
                             </select>
-                            <div class="invalid-feedback">Example invalid select feedback</div>
+                            <div class="invalid-feedback error-text">Category is required</div>
 
                             <div class="choose-file text-center my-4 py-4 rounded" id="drop-container">
                                 <label for="file-upload">
                                 <span class="d-block font-weight-bold text-dark" id="file-text">Image(s):</span>
                                 <span class="d-block btn bg-primary text-white my-3 select-files">Choose image(s)</span>
-                                <span class="d-block">Maximum number of images: 5</span>
-                                <input type="file" class="form-control-file d-none" id="file-upload" name="image" multiple>
-                                <div class="invalid-feedback">Image(s) required</div>
+                                <span class="d-block" id="num-of-imgs">Maximum number of images: 5</span>
+                                <input type="file" class="form-control-file d-none add-images" id="file-upload" name="image" multiple required>
+                                <div class="invalid-feedback file-msg">Image(s) required</div>
                             </label>
 
                             </div>
@@ -55,4 +55,4 @@
         </div>
     </section>
 
-    <script src="/js/fileInput.js"></script>
+    <script src="/js/newFileInput.js"></script>

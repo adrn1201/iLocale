@@ -29,9 +29,9 @@ const seedDB = async() => {
             title: `${sample(businesses)}`,
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, unde cupiditate! Aliquid quidem nostrum enim molestias nulla eius consequatur consectetur eligendi pariatur. Fuga atque error explicabo obcaecati, debitis quaerat doloremque.',
             images: [{
-                url: 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642398778/iLocale/w2cjwlko98y1i8z1vtx2.jpg',
-                filename: 'iLocale/w2cjwlko98y1i8z1vtx2',
-                originalName: 'yum2.jpg'
+                url: 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642310928/iLocale/qurmqkkmuugheq1fxztt.jpg',
+                filename: 'iLocale/qurmqkkmuugheq1fxztt',
+                originalName: 'salad.jpg'
             }]
         });
         const category = await Category.findById(business.category);

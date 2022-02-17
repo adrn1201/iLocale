@@ -3048,3 +3048,15 @@ form textarea {
     color: #333333;
     background-color: #fcfcfa;
 }
+
+.file-msg {
+    font-size: 15px;
+}
+
+.slc-cat {
+    height: 50px;
+}
+
+.num-of-imgs {
+    color: #df4759;
+}
