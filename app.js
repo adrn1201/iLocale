@@ -21,6 +21,7 @@ const expressSanitizer = require('express-sanitizer');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const User = require('./models/user');
 const passport = require('passport');
@@ -50,9 +51,22 @@ app.use(mongoSanitize({
     replaceWith: '_'
 }));
 
+const secret = process.env.SECRET || 'devmodesecret!';
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
+
+store.on("error", function(e) {
+    console.log("SESSION STORE ERROR: ", e);
+});
+
 const sessionConfig = {
+    store,
     name: 'session',
-    secret: 'devmodesecret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
