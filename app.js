@@ -128,7 +128,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/google/callback",
+        callbackURL: process.env.GOOGLE_CALLBACK || "http://localhost:3000/google/callback",
         passReqToCallback: true
     },
     async function(request, accessToken, refreshToken, profile, done) {
