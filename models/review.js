@@ -12,7 +12,7 @@ const reviewSchema = new Schema({
 }, { timestamps: true });
 
 reviewSchema.virtual('displayDate').get(function() {
-    return this.createdAt.split('GMT')[1];
+    return this.createdAt.toString().split('GMT')[0];
 });
 
 reviewSchema.plugin(mongoosePaginate);
