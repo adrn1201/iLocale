@@ -36,5 +36,6 @@ module.exports.login = (req, res) => {
 
 module.exports.logout = (req, res) => {
     req.logout();
+    req.flash('success', 'You\'ve successfully logged out of iLocale');
     res.redirect('/');
 }

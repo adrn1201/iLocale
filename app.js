@@ -18,6 +18,8 @@ const reviewRoutes = require('./routes/reviews');
 const AppError = require('./utils/AppError');
 const catchAsync = require('./utils/catchAsync');
 const expressSanitizer = require('express-sanitizer');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 const session = require('express-session');
 const flash = require('connect-flash');
 const User = require('./models/user');
@@ -41,9 +43,12 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(mongoSanitize({
+    replaceWith: '_'
+}));
 
 const sessionConfig = {
     name: 'session',
@@ -52,6 +57,7 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        //secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -59,6 +65,46 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+
+const scriptSrcUrls = [];
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com",
+    "https://stackpath.bootstrapcdn.com",
+    "https://api.mapbox.com",
+    "https://api.tiles.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://use.fontawesome.com",
+];
+const connectSrcUrls = [
+    "https://api.mapbox.com",
+    "https://*.tiles.mapbox.com",
+    "https://events.mapbox.com",
+];
+const fontSrcUrls = [
+    'https://fonts.gstatic.com'
+];
+
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            childSrc: ["blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https://res.cloudinary.com/dofxpwwou/",
+                "https://images.unsplash.com",
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
 app.use(expressSanitizer());
 
 app.use(passport.initialize());
@@ -101,7 +147,7 @@ app.use(catchAsync(async(req, res, next) => {
 
 app.use((req, res, next) => {
     res.locals.categories = req.session.categories;
-    res.locals.navbarCategory = req.query.category;
+    res.locals.partialCategory = req.query.category;
     res.locals.sortBy = req.query.sortBy;
     res.locals.title = req.query.title;
     res.locals.location = req.query.location

@@ -19,10 +19,10 @@
                                 Businesses <span><i class="fa fa-angle-down "></i></span>
                             </a>
                                 <div class="dropdown-menu ">
-                                    <a class="dropdown-item <%=( path !=='/' && !navbarCategory) && path.split( '/businesses')[1]==='' ? 'active' : ''%>" href="/businesses"> All Businesses
+                                    <a class="dropdown-item <%=( path !=='/' && !partialCategory) && path.split( '/businesses')[1]==='' ? 'active' : ''%>" href="/businesses"> All Businesses
                                 </a>
                                     <% for(const category of categories){ %>
-                                        <a class="dropdown-item <%= navbarCategory && navbarCategory === category.categoryName ? 'active' : '' %>" href="/businesses?<%= `category=${category.categoryName}` %>">
+                                        <a class="dropdown-item <%= partialCategory && partialCategory === category.categoryName ? 'active' : '' %>" href="/businesses?<%= `category=${category.categoryName}` %>">
                                             <span><i class="fa fa-<%=category.iconClass%>"></i></span>
                                             <%= `${category.displayText}s` %>
                                         </a>

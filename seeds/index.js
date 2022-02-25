@@ -29,8 +29,8 @@ const seedDB = async() => {
             title: `${sample(businesses)}`,
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, unde cupiditate! Aliquid quidem nostrum enim molestias nulla eius consequatur consectetur eligendi pariatur. Fuga atque error explicabo obcaecati, debitis quaerat doloremque.',
             images: [{
-                url: 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642310928/iLocale/qurmqkkmuugheq1fxztt.jpg',
-                filename: 'iLocale/qurmqkkmuugheq1fxztt',
+                url: 'https://res.cloudinary.com/dofxpwwou/image/upload/v1643261506/iLocale/ebnnrzn5rfdnuf4p63nw.jpg',
+                filename: 'iLocale/ebnnrzn5rfdnuf4p63nw',
                 originalName: 'salad.jpg'
             }]
         });

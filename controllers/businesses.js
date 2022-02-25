@@ -143,7 +143,6 @@ module.exports.updateBusiness = async(req, res) => {
         }
         await business.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } });
     }
-    console.log(business);
     req.flash('success', 'Successfully Updated Post!');
     res.redirect(`/businesses/${business._id}`);
 };

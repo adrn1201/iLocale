@@ -17,10 +17,12 @@
                                     <p class="px-3 mt-3 pb-2 text-dark">
                                         <%= err.message %>
                                     </p>
-                                    <p>
-                                        <%= err.stack %>
-                                    </p>
-                                    <a href="/" class="btn btn-info">GO HOME</a>
+                                    <% if (process.env.NODE_ENV !== 'production') { %>
+                                        <p>
+                                            <%= err.stack %>
+                                        </p>
+                                        <% } %>
+                                            <a href="/" class="btn btn-info">GO HOME</a>
                                 </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 const Business = require('../models/business');
 const Review = require('../models/review');
-const Category = require('../models/category');
 const { businessSchema, reviewSchema, contactSchema, categorySchema } = require('../schemas');
 const AppError = require('../utils/AppError');
 
@@ -11,6 +10,13 @@ module.exports.isLoggedIn = (req, res, next) => {
         return res.redirect('/login');
     }
     next();
+}
+
+module.exports.isCurrentUser = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/');
 }
 
 module.exports.validateBusiness = (req, res, next) => {

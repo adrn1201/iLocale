@@ -676,7 +676,7 @@ ul.pagination .active a {
 }
 
 .bg-1 {
-    background: url("../images/home/hero.jpg");
+    background: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -688,7 +688,7 @@ ul.pagination .active a {
 }
 
 .bg-3 {
-    background: url(../images/call-to-action/cta-background.jpg);
+    background: url("https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -1026,8 +1026,8 @@ ul.pagination .active a {
 }
 
 .short-popular-category-list ul li a {
-    border: 1px solid #404040;
-    color: #c1c1c1;
+    border: 1px solid white;
+    color: white;
     font-weight: 200;
     padding: 4px 10px;
     font-size: 12px;

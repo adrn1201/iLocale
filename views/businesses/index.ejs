@@ -61,56 +61,62 @@
                                 </div>
                             </div>
                         </div>
-                        <% for(const business of businesses.docs){ %>
-                            <div class="biz-listing-list mt-20">
-                                <div class="row p-lg-3 p-sm-5 p-4">
-                                    <div class="col-lg-4 align-self-center">
-                                        <a href="/businesses/<%=business._id  %>">
-                                                <img src="<%= business.images.length ? business.images[0].url : 'https://res.cloudinary.com/dofxpwwou/image/upload/v1642310928/iLocale/qurmqkkmuugheq1fxztt.jpg'%>" class="img-fluid"
+                        <% if(businesses.docs.length){ %>
+                            <% for(const business of businesses.docs){ %>
+                                <div class="biz-listing-list mt-20">
+                                    <div class="row p-lg-3 p-sm-5 p-4">
+                                        <div class="col-lg-4 align-self-center">
+                                            <a href="/businesses/<%=business._id  %>">
+                                                <img src="<%= business.images.length ? business.images[0].url : 'https://res.cloudinary.com/dofxpwwou/image/upload/v1643261506/iLocale/ebnnrzn5rfdnuf4p63nw.jpg'%>" class="img-fluid"
                                                 alt="Card image cap">
                                             </a>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-10">
-                                                <div class="ad-listing-content">
-                                                    <div>
-                                                        <a href="/businesses/<%=business._id  %>" class="font-weight-bold">
-                                                            <%= business.title %>
-                                                        </a>
-                                                    </div>
-                                                    <ul class="list-inline mt-2 mb-3">
-                                                        <li class="list-inline-item">
-                                                            <a href="/businesses?category=<%= business.category.categoryName %>"> <i class="fa fa-<%=business.category.iconClass%>"></i>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-10">
+                                                    <div class="ad-listing-content">
+                                                        <div>
+                                                            <a href="/businesses/<%=business._id  %>" class="font-weight-bold">
+                                                                <%= business.title %>
+                                                            </a>
+                                                        </div>
+                                                        <ul class="list-inline mt-2 mb-3">
+                                                            <li class="list-inline-item">
+                                                                <a href="/businesses?category=<%= business.category.categoryName %>"> <i class="fa fa-<%=business.category.iconClass%>"></i>
                                                                         <%= business.category ? business.category.displayText : 'N/A' %>
                                                                     </a>
-                                                        </li>
-                                                        <li class="list-inline-item"><a href=""><i class="fa fa-location-arrow"></i> <%=business.location %></a></li>
-                                                    </ul>
-                                                    <p class="pr-5">
-                                                        <%= business.shortText %>
-                                                    </p>
+                                                            </li>
+                                                            <li class="list-inline-item"><a href=""><i class="fa fa-location-arrow"></i> <%=business.location %></a></li>
+                                                        </ul>
+                                                        <p class="pr-5">
+                                                            <%= business.shortText %>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 align-self-center">
-                                                <div class="product-ratings float-lg-right pb-3" id="biz-<%=business._id%>">
-                                                    <% if(business.rateCount){ %>
-                                                        <div class="stars-outer">
-                                                            <div class="stars-inner"></div>
-                                                        </div>
-                                                        <span class="text-muted" style="font-size: small;">
+                                                <div class="col-lg-6 align-self-center">
+                                                    <div class="product-ratings float-lg-right pb-3" id="biz-<%=business._id%>">
+                                                        <% if(business.rateCount){ %>
+                                                            <div class="stars-outer">
+                                                                <div class="stars-inner"></div>
+                                                            </div>
+                                                            <span class="text-muted" style="font-size: small;">
                                                         <%= business.rateCount && business.rateCount === 1 ? `${business.rateCount} review` : `${business.rateCount} reviews`%>
                                                     </span>
-                                                        <% } else{ %>
-                                                            <p>No reviews</p>
-                                                            <% } %>
+                                                            <% } else{ %>
+                                                                <p>No reviews</p>
+                                                                <% } %>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <% } %>
+                                <% } %>
+                                    <% } else{ %>
+                                        <p class="text-center text-dark mt-5">No
+                                            <%= category %> businesses available for now. </p>
+                                        <% } %>
+
             </div>
             <div id="clusterMap"></div>
             </div>
@@ -130,5 +136,5 @@
                 </script>
                 <script src="/js/indexStars.js"></script>
                 <script src="/js/clusterMap.js"></script>
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                <script src="/js/jquery-3.6.0.min.js"></script>
                 <script src="/js/indexPagination.js"></script>
