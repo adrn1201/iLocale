@@ -11,5 +11,9 @@ const reviewSchema = new Schema({
     }
 }, { timestamps: true });
 
+reviewSchema.virtual('displayDate').get(function() {
+    return this.createdAt.split('GMT')[1];
+});
+
 reviewSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Review', reviewSchema);
