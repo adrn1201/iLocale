@@ -1,6 +1,6 @@
 # iLocale
 
-iLocale is a web application that allows users to discover businesses (such as restaurants, hotels, and fitness centers) at location worldwide. iLocale also provides User reviews and information about a specific businesses.
+iLocale is a web application that allows users to discover businesses (such as restaurants, hotels, and fitness centers) at any location worldwide. iLocale also provides User reviews and information about a specific businesses.
 
 This application is developed with: **MongoDB, Express.js, Node.js, Embedded Javascript(EJS), HTML, CSS, Bootstrap 4, and Vanilla Javascript**
 
