@@ -9,7 +9,7 @@ Site URL: https://ilocale.herokuapp.com/
 ## Features 
 - Google O Auth Integration with Passport.js
 - Basic Authentication with Passport.js
-- Email Sending with Send Grid API (Single Sender Verified). 
+- Email Sending with Nodemailer. 
 - Geocode locations with Mapbox api.
 - Cluster Geocoded locations with Mapbox Api.
 - Upload Images and Store in Cloudinary.
